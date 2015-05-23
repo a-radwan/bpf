@@ -18,7 +18,7 @@ public class GoogleMapv2 extends Activity {
 
     private GoogleMap map;
 //    private final LatLng YOUR_LAT = new LatLng(latitude, longitude);
-   
+      
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
