@@ -23,7 +23,7 @@ public class GoogleMapv2 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_mapv2);
-        
+          
       map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
       map.setMyLocationEnabled(true);
       Location userLocation = map.getMyLocation();
