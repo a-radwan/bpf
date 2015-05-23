@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/txt_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:gravity="clip_horizontal|center_vertical"
+            android:text="Wellcome" 
+            android:textColor="#fff"
+            android:textSize="35sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+
+   
+        <Spinner
+            android:id="@+id/cat_spinner"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+             />
+      
+ 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_search_by_barcode"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/scan_bar_code"
+            android:gravity="center_horizontal|center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/login_icon"
+            android:gravity="center_horizontal|center_vertical" />
+    </LinearLayout>
+
+</LinearLayout>
