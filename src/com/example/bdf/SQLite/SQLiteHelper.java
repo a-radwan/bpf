@@ -144,8 +144,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		return VendorTable.add(this.getWritableDatabase(), vendor);
 	}
 
-	public Vendor getVendor(int barcode) {
-		return VendorTable.get(this.getReadableDatabase(), barcode);
+	public Vendor getVendor(int id) {
+		return VendorTable.get(this.getReadableDatabase(), id);
 	}
 
 	// Get All Books
