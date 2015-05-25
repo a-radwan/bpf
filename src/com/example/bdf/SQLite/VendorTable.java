@@ -78,7 +78,7 @@ class VendorTable {
 		// 2. build query
 		Cursor cursor = db.query(TABLE_VENDORS, // a. table
 				COLUMNS, // b. column names
-				KEY_VENDOR_NAME + "= ?", // c. selections
+				KEY_VENDORID + "= ?", // c. selections
 				new String[] { String.valueOf(id) }, // d. selections args
 				null, // e. group by
 				null, // f. having
@@ -99,6 +99,40 @@ class VendorTable {
 		return vendor;
 
 	}
+	public static Vendor get(SQLiteDatabase db, String userName) {
+		// 1. get reference to readable DB
+
+		// 2. build query
+		Cursor cursor = db.query(TABLE_VENDORS, // a. table
+				COLUMNS, // b. column names
+				KEY_VENDOR_NAME + "= ?", // c. selections
+				new String[] { userName }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+
+		// 3. if we got results get the first one
+		Vendor vendor=new Vendor();
+
+
+		if (cursor!= null)
+		
+			if(cursor.moveToFirst())
+		{
+		vendor.setId(cursor.getInt(COL_VENDORID));
+		vendor.setName(cursor.getString(COL_NAME));
+		vendor.setPassword(cursor.getString(COL_PASSWORD));
+		vendor.setLatitude(cursor.getDouble(COL_LATITUDE));
+		vendor.setLongitude(cursor.getDouble(COL_LONGITUDE));
+		
+		// db.close();
+		}
+			
+		return vendor;
+
+	}
+
 
 
 	public static void delete(SQLiteDatabase db, Vendor vendor) {
