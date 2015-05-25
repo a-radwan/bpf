@@ -26,6 +26,7 @@ public class Driver extends Activity implements OnClickListener{
 	private SQLiteHelper db;
 	EditText loginUsername; 
 	EditText loginPwd;
+	Dialog loginDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,14 +65,14 @@ public class Driver extends Activity implements OnClickListener{
 			@Override
 			public void onClick(View v) 
 			{
-				Dialog d = new Dialog(Driver.this);
+				 loginDialog = new Dialog(Driver.this);
 			
-				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				d.setContentView(R.layout.login_layout);
-				loginUsername = (EditText) d.findViewById(R.id.etxt_username);
-				loginPwd = (EditText) d.findViewById(R.id.etxt_pwd);
-				TextView txt_header = (TextView) d.findViewById(R.id.txt_Credintals);
-				Button btn_login = (Button) d.findViewById(R.id.btn_login_in);
+				loginDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				loginDialog.setContentView(R.layout.login_layout);
+				loginUsername = (EditText) loginDialog.findViewById(R.id.etxt_username);
+				loginPwd = (EditText) loginDialog.findViewById(R.id.etxt_pwd);
+				TextView txt_header = (TextView) loginDialog.findViewById(R.id.txt_Credintals);
+				Button btn_login = (Button) loginDialog.findViewById(R.id.btn_login_in);
 				btn_login.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -83,7 +84,7 @@ public class Driver extends Activity implements OnClickListener{
 						{
 							UserProfile.login(vendor.getId(), getApplicationContext());
 							Toast.makeText(getApplicationContext(), "welcome "+vendor.getName(),Toast.LENGTH_SHORT).show();						
-		
+							loginDialog.cancel();
 						}
 						else
 						{
@@ -96,7 +97,7 @@ public class Driver extends Activity implements OnClickListener{
 				loginUsername.setTypeface(typeface2);
 				loginPwd.setTypeface(typeface2);
 				txt_header.setTypeface(typeface2);
-				d.show();
+				loginDialog.show();
 
 			}
 		});
