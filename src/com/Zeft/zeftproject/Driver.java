@@ -92,7 +92,7 @@ public class Driver extends Activity implements OnClickListener{
 
 						}
 					
-				}
+				} 
 					});
 				loginUsername.setTypeface(typeface2);
 				loginPwd.setTypeface(typeface2);
