@@ -11,6 +11,7 @@ public class VendorAdd extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_vendor_add);
+		
 	}
 
 	

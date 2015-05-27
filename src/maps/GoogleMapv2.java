@@ -16,38 +16,51 @@ import android.widget.Toast;
 
 public class GoogleMapv2 extends Activity {
 
-    private GoogleMap map;
-//    private final LatLng YOUR_LAT = new LatLng(latitude, longitude);
-      
+	private GoogleMap map;
+	//    private final LatLng YOUR_LAT = new LatLng(latitude, longitude);
+
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google_mapv2);
-          
-      map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-      map.setMyLocationEnabled(true);
-      Location userLocation = map.getMyLocation();
-              LatLng myLocation = null;
-              if (userLocation != null)
-              {
-                  myLocation = new LatLng(userLocation.getLatitude(),
-                          userLocation.getLongitude()); 
-                  map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,
-                          15));
-                 
-                 
-    
-              }
-             
-              
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_google_mapv2);
+
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		map.setMyLocationEnabled(true);
+		Location userLocation = map.getMyLocation();
+		LatLng myLocation = null;
+		if (userLocation != null)
+		{
+			myLocation = new LatLng(userLocation.getLatitude(),
+					userLocation.getLongitude()); 
+			map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,
+					15));
+
+
+
+		}
+		Bundle bundle = this.getIntent().getExtras();  
+
+		if(bundle !=null)
+		{
+
+			String []temp = bundle.getString("Location").split(",");
+			if(temp[4].equalsIgnoreCase("view_info"))
+			AddMarker(Double.parseDouble(temp[0]), Double.parseDouble(temp[1]), temp[2], temp[3]);
+
+		}
+		else
+		{
+			Toast.makeText(getApplicationContext(), "Somthing Wrong", Toast.LENGTH_SHORT).show();
+		}
+
 	}
 	public void AddMarker(double lat , double longitude , String Title , String info)
 	{
-		
+
 		Marker perth = map.addMarker(new MarkerOptions()
-		                          .position(new LatLng(lat,longitude))
-		                          .draggable(true)
-		                          .title(info)
-		                          .snippet(info));
+		.position(new LatLng(lat,longitude))
+		.draggable(true)
+		.title(Title)
+		.snippet(info));
 	}
-	}
+}

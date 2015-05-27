@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/txt_Credintals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Enter Your Info."
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
+
+    <EditText
+        android:id="@+id/etxt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="text"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/etxt_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/etxt_pwd_conf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Password Conf"
+        android:inputType="textPassword"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/etxt_pwd_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Phone"
+        android:inputType="number"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+       <EditText
+        android:id="@+id/etxt_pwd_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+        <EditText
+        android:id="@+id/etxt_lat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="latitude"
+        android:inputType="numberDecimal"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+    <EditText
+        android:id="@+id/etxt_longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Longitude"
+        android:inputType="numberDecimal"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_login_in"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/choose_icon"
+        android:gravity="center_horizontal|center_vertical" />
+
+</LinearLayout>

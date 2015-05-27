@@ -1,4 +1,6 @@
 package com.Zeft.zeftproject;
+import maps.GoogleMapv2;
+
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.UserProfile;
@@ -27,6 +29,7 @@ public class Driver extends Activity implements OnClickListener{
 	EditText loginUsername; 
 	EditText loginPwd;
 	Dialog loginDialog;
+	private Button btn_signup;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,8 +46,10 @@ public class Driver extends Activity implements OnClickListener{
 
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
+
 		btn_log = (Button) findViewById(R.id.btn_login);
 		btn_bar = (Button) findViewById(R.id.btn_search_by_barcode);
+		btn_signup = (Button) findViewById(R.id.btn_signup);
 		txt_welcome = (TextView)  findViewById(R.id.txt_welcome);
 		spinner = (Spinner) findViewById(R.id.cat_spinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -65,8 +70,8 @@ public class Driver extends Activity implements OnClickListener{
 			@Override
 			public void onClick(View v) 
 			{
-				 loginDialog = new Dialog(Driver.this);
-			
+				loginDialog = new Dialog(Driver.this);
+
 				loginDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				loginDialog.setContentView(R.layout.login_layout);
 				loginUsername = (EditText) loginDialog.findViewById(R.id.etxt_username);
@@ -80,7 +85,7 @@ public class Driver extends Activity implements OnClickListener{
 						// TODO Auto-generated method stub
 						Vendor vendor=db.getVendor(loginUsername.getText().toString());
 						if(vendor.getId()!=0 &&vendor.getPassword().equals(loginPwd.getText().toString()))
-						
+
 						{
 							UserProfile.login(vendor.getId(), getApplicationContext());
 							Toast.makeText(getApplicationContext(), "welcome "+vendor.getName(),Toast.LENGTH_SHORT).show();						
@@ -91,9 +96,9 @@ public class Driver extends Activity implements OnClickListener{
 							Toast.makeText(getApplicationContext(), "Wrong username or password",Toast.LENGTH_SHORT).show();
 
 						}
-					
-				} 
-					});
+
+					} 
+				});
 				loginUsername.setTypeface(typeface2);
 				loginPwd.setTypeface(typeface2);
 				txt_header.setTypeface(typeface2);
@@ -102,7 +107,7 @@ public class Driver extends Activity implements OnClickListener{
 			}
 		});
 
-
+		btn_signup.setOnClickListener(this);
 
 
 	}
@@ -115,6 +120,76 @@ public class Driver extends Activity implements OnClickListener{
 			IntentIntegrator scanIntegrator = new IntentIntegrator(this);
 			scanIntegrator.initiateScan();
 		}
+		if(v.getId() == R.id.btn_signup)
+		{
+			Dialog d = new Dialog(Driver.this);
+			//////////////////////
+			//ADDING VIEW
+			d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			d.setContentView(R.layout.sign_up);
+			////////////////////////////
+			///INTALIZATION
+			TextView txt_header = (TextView) d.findViewById(R.id.txt_Credintals);
+			final EditText etxt_name = (EditText) d.findViewById(R.id.etxt_name);
+			final EditText etxt_pwd = (EditText) d.findViewById(R.id.etxt_pwd);
+			final EditText etxt_pwd_conf = (EditText) d.findViewById(R.id.etxt_pwd_conf);
+			final EditText etxt_email = (EditText) d.findViewById(R.id.etxt_pwd_email);
+			final EditText etxt_phone = (EditText) d.findViewById(R.id.etxt_pwd_phone);
+			final EditText etxt_lat = (EditText) d.findViewById(R.id.etxt_lat);
+			final EditText etxt_long = (EditText) d.findViewById(R.id.etxt_longitude);
+			Button btn_sign = (Button) d.findViewById(R.id.btn_login_in);
+			///////////////////////////////
+			////TYPEFACING
+			txt_header.setTypeface(typeface2);
+			etxt_name.setTypeface(typeface2);
+			etxt_pwd.setTypeface(typeface2);
+			etxt_pwd_conf.setTypeface(typeface2);
+			etxt_email.setTypeface(typeface2);
+			etxt_phone.setTypeface(typeface2);
+			etxt_lat.setTypeface(typeface2);
+			etxt_long.setTypeface(typeface2);
+			///////////////////
+			//LISTENER
+			btn_sign.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					
+				
+					if(!(etxt_name.getText()+"").equals("") && !(etxt_phone.getText()+"").equals("") 
+							&&!(etxt_pwd.getText()+"").equals("")&&!(etxt_pwd_conf.getText()+"").equals("") 
+							&&!(etxt_email.getText()+"").equals("") &&!(etxt_lat.getText()+"").equals("")
+							&&!(etxt_long.getText()+"").equals(""))
+					{
+						if(etxt_pwd.getText().toString().equals(etxt_pwd_conf.getText().toString()))
+						{
+						Toast.makeText(getApplicationContext(), "Shof Sh8lak A this Data to DB", Toast.LENGTH_SHORT).show();
+						Intent i = new Intent(getApplicationContext() , Vendor_info.class);
+						Bundle b = new Bundle();
+						//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// 4 ---> phone
+						Double Locations[] = {Double.parseDouble(etxt_lat.getText().toString()) , Double.parseDouble(etxt_long.getText().toString())}; 
+						String title = etxt_name.getText().toString();
+						String info = etxt_email.getText().toString();
+						String phone = etxt_phone.getText().toString();
+						b.putString("Vendor_Data", Locations[0]+","+Locations[1]+","+title+","+info+","+phone );
+						i.putExtras(b);
+						startActivity(i);
+						}
+						else
+						{
+							Toast.makeText(getApplicationContext(), "PassWord Dos'nt Match!", Toast.LENGTH_SHORT).show();
+						}
+					}
+					else{
+						Toast.makeText(getApplicationContext(), "Some Feilds Are Empty", Toast.LENGTH_SHORT).show();
+					}
+					
+				}
+			});
+			//////////////////
+			///STARTING VIEW
+			d.show();
+		}
 
 	}
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) 
@@ -126,7 +201,8 @@ public class Driver extends Activity implements OnClickListener{
 			String scanFormat = scanningResult.getFormatName();
 			Toast.makeText(getApplicationContext(), "Formate BarCode :"+scanFormat+" Content "+scanContent, Toast.LENGTH_LONG).show();
 		}
-		else{
+		else
+		{
 			Toast toast = Toast.makeText(getApplicationContext(), 
 					"No scan data received!", Toast.LENGTH_SHORT);
 			toast.show();
