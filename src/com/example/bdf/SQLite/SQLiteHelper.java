@@ -28,7 +28,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static int OTHER_CATEGORY_ID;
 	public static int notificationFlag=0;
 	// Database Version
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 3;
 
 	// Database Name
 	private static final String DATABASE_NAME = "bdfDB";
@@ -83,9 +83,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_VENDOR_TABLE);
 		db.execSQL(CREATE_CATEGORY_TABLE);
 		db.execSQL(CREATE_PRODUCT_TABLE);
-
 		db.execSQL(CREATE_VENDOR_HAS_PRODUCT_TABLE);
-			
 
 	}
 
@@ -146,7 +144,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	public Vendor getVendor(int id) {
 		return VendorTable.get(this.getReadableDatabase(), id);
+	}	
+	public Vendor getVendor(String userName) {
+		return VendorTable.get(this.getReadableDatabase(), userName);
 	}
+
 
 	// Get All Books
 	public List<Vendor> getAllIcomes() {
