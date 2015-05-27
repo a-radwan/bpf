@@ -18,5 +18,6 @@
 
     <string name="title_activity_barcode_scanning_app">BarcodeScanningApp</string>
     <string name="title_activity_google_mapv2">GoogleMapv2</string>
+    <string name="title_activity_vendor_add">VendorAdd</string>
 
 </resources>
