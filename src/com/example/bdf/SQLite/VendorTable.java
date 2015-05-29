@@ -21,15 +21,17 @@ class VendorTable {
 	private static final String KEY_PASSWORD = "password";
 	private static final String KEY_LONGITUDE = "longitude";
 	private static final String KEY_LATITUDE = "latitude";
-
+	private static final String KEY_EMAIL = "email";
+	private static final String KEY_PHONE = "Phone";
 	static final String[] COLUMNS = { KEY_VENDORID, KEY_VENDOR_NAME,
-		KEY_PASSWORD,KEY_LONGITUDE,KEY_LATITUDE };
+		KEY_PASSWORD,KEY_LONGITUDE,KEY_LATITUDE , KEY_EMAIL , KEY_PHONE };
 	static final int COL_VENDORID = 0;
 	static final int COL_NAME= 1;
 	static final int COL_PASSWORD = 2;
 	static final int COL_LONGITUDE = 3;
 	static final int COL_LATITUDE = 4;
-
+	static final int COL_EMAIL = 5;
+	static final int COL_PHONE = 6;
 
 	public static Vendor add(SQLiteDatabase db, Vendor vendor) {
 
@@ -38,6 +40,8 @@ class VendorTable {
 		values.put(KEY_PASSWORD , vendor.getPassword());
 		values.put(KEY_LATITUDE, vendor.getLatitude());
 		values.put(KEY_LONGITUDE, vendor.getLongitude());
+		values.put(KEY_EMAIL, vendor.getEmail());
+		values.put(KEY_PHONE, vendor.getPhone());
 		vendor.setId((int)db.insert(TABLE_VENDORS, // table
 				null, // nullColumnHack
 				values)); // key/value -> keys = column names/ values = column
@@ -64,6 +68,8 @@ class VendorTable {
 					vendor.setPassword(cursor.getString(COL_PASSWORD));
 					vendor.setLatitude(cursor.getDouble(COL_LATITUDE));
 					vendor.setLongitude(cursor.getDouble(COL_LONGITUDE));
+					vendor.setEmail(cursor.getString(COL_EMAIL));
+					vendor.setPhone(cursor.getString(COL_PHONE));
 				// Add book to books
 				vendors.add(vendor);
 			} 
@@ -94,7 +100,8 @@ class VendorTable {
 		vendor.setPassword(cursor.getString(COL_PASSWORD));
 		vendor.setLatitude(cursor.getDouble(COL_LATITUDE));
 		vendor.setLongitude(cursor.getDouble(COL_LONGITUDE));
-		
+		vendor.setEmail(cursor.getString(COL_EMAIL));
+		vendor.setPhone(cursor.getString(COL_PHONE));
 		// db.close();
 		return vendor;
 
@@ -125,7 +132,8 @@ class VendorTable {
 		vendor.setPassword(cursor.getString(COL_PASSWORD));
 		vendor.setLatitude(cursor.getDouble(COL_LATITUDE));
 		vendor.setLongitude(cursor.getDouble(COL_LONGITUDE));
-		
+		vendor.setEmail(cursor.getString(COL_EMAIL));
+		vendor.setPhone(cursor.getString(COL_PHONE));
 		// db.close();
 		}
 			

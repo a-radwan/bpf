@@ -6,6 +6,8 @@ public class Vendor {
 	private String password;
 	private double longitude;
 	private double latitude;
+	private String email;
+	private String phone;
 	public Vendor() {
 		// TODO Auto-generated constructor stub
 	}
@@ -39,6 +41,16 @@ public class Vendor {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	
-
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }

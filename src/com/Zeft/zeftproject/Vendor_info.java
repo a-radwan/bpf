@@ -85,7 +85,7 @@ public class Vendor_info extends Activity {
 				}
 				else
 				{
-					///////// No Bundle	
+					/////////No Bundle	
 				}
 			}
 		});

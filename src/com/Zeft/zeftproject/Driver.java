@@ -1,13 +1,10 @@
 package com.Zeft.zeftproject;
-import maps.GoogleMapv2;
-
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.UserProfile;
 import com.example.bdf.data.Vendor;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -26,10 +23,11 @@ public class Driver extends Activity implements OnClickListener{
 	private Spinner spinner;
 	private Typeface typeface2;
 	private SQLiteHelper db;
-	EditText loginUsername; 
-	EditText loginPwd;
-	Dialog loginDialog;
+	private EditText loginUsername; 
+	private EditText loginPwd;
+	private Dialog loginDialog;
 	private Button btn_signup;
+	private Vendor vendor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,16 +35,16 @@ public class Driver extends Activity implements OnClickListener{
 		/////////////////////////////////////////////
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
-		Vendor vendor =new Vendor();
-		vendor.setLatitude(32.258);
-		vendor.setLongitude(12.12565);
-		vendor.setName("a123");
-		vendor.setPassword("a123");
+		 vendor =new Vendor();
 		db.addVendor(vendor);
-
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
-
+//		vendor.setName("saad");
+//		vendor.setPassword("saad");
+//		vendor.setLatitude(21.200);
+//		vendor.setLongitude(23.000);
+//		vendor.setEmail("Saadajaj35@gmail.com");
+//		vendor.setPhone("0568725624");
 		btn_log = (Button) findViewById(R.id.btn_login);
 		btn_bar = (Button) findViewById(R.id.btn_search_by_barcode);
 		btn_signup = (Button) findViewById(R.id.btn_signup);
@@ -88,7 +86,8 @@ public class Driver extends Activity implements OnClickListener{
 
 						{
 							UserProfile.login(vendor.getId(), getApplicationContext());
-							Toast.makeText(getApplicationContext(), "welcome "+vendor.getName(),Toast.LENGTH_SHORT).show();						
+							startActivity(new Intent(getApplicationContext(),Vendor_info.class));
+							finish();
 							loginDialog.cancel();
 						}
 						else
@@ -163,7 +162,6 @@ public class Driver extends Activity implements OnClickListener{
 					{
 						if(etxt_pwd.getText().toString().equals(etxt_pwd_conf.getText().toString()))
 						{
-						Toast.makeText(getApplicationContext(), "Shof Sh8lak A this Data to DB", Toast.LENGTH_SHORT).show();
 						Intent i = new Intent(getApplicationContext() , Vendor_info.class);
 						Bundle b = new Bundle();
 						//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// 4 ---> phone
@@ -171,6 +169,15 @@ public class Driver extends Activity implements OnClickListener{
 						String title = etxt_name.getText().toString();
 						String info = etxt_email.getText().toString();
 						String phone = etxt_phone.getText().toString();
+						//adding vendor info to the DB
+						
+						
+						vendor.setName(title);
+						vendor.setPassword(etxt_pwd.getText().toString());
+						vendor.setLatitude(Locations[0]);
+						vendor.setLongitude(Locations[1]);
+						vendor.setEmail(info);
+						vendor.setPhone(phone);
 						b.putString("Vendor_Data", Locations[0]+","+Locations[1]+","+title+","+info+","+phone );
 						i.putExtras(b);
 						startActivity(i);

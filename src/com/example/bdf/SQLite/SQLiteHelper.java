@@ -28,10 +28,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static int OTHER_CATEGORY_ID;
 	public static int notificationFlag=0;
 	// Database Version
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 8;
 
 	// Database Name
-	private static final String DATABASE_NAME = "bdfDB";
+	private static final String DATABASE_NAME = "bdfDB2";
 
 	public static SQLiteHelper getInstance(Context context) {
 
@@ -58,7 +58,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				+ "name TEXT, " 
 				+ "password TEXT, " 
 				+ "longitude DOUBLE, "
-				+ "latitude DOUBLE )";
+				+ "latitude DOUBLE "
+				+ "email  TEXT, "
+				+ "Phone TEXT)";
 
 		String CREATE_CATEGORY_TABLE = "CREATE TABLE categories ( "
 				+ "categoryid INTEGER PRIMARY KEY AUTOINCREMENT, "
