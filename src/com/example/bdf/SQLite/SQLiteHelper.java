@@ -28,10 +28,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static int OTHER_CATEGORY_ID;
 	public static int notificationFlag=0;
 	// Database Version
-	private static final int DATABASE_VERSION = 8;
-
+	private static final int DATABASE_VERSION = 10;
 	// Database Name
-	private static final String DATABASE_NAME = "bdfDB2";
+	private static final String DATABASE_NAME = "bdfDB";
 
 	public static SQLiteHelper getInstance(Context context) {
 
@@ -58,7 +57,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				+ "name TEXT, " 
 				+ "password TEXT, " 
 				+ "longitude DOUBLE, "
-				+ "latitude DOUBLE "
+				+ "latitude DOUBLE, "
 				+ "email  TEXT, "
 				+ "Phone TEXT)";
 

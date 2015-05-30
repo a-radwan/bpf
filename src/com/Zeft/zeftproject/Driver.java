@@ -35,16 +35,10 @@ public class Driver extends Activity implements OnClickListener{
 		/////////////////////////////////////////////
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
-		 vendor =new Vendor();
-		db.addVendor(vendor);
+		vendor = new Vendor();
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
-//		vendor.setName("saad");
-//		vendor.setPassword("saad");
-//		vendor.setLatitude(21.200);
-//		vendor.setLongitude(23.000);
-//		vendor.setEmail("Saadajaj35@gmail.com");
-//		vendor.setPhone("0568725624");
+		db.addVendor(vendor);
 		btn_log = (Button) findViewById(R.id.btn_login);
 		btn_bar = (Button) findViewById(R.id.btn_search_by_barcode);
 		btn_signup = (Button) findViewById(R.id.btn_signup);
@@ -150,11 +144,11 @@ public class Driver extends Activity implements OnClickListener{
 			///////////////////
 			//LISTENER
 			btn_sign.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					
-				
+
+
 					if(!(etxt_name.getText()+"").equals("") && !(etxt_phone.getText()+"").equals("") 
 							&&!(etxt_pwd.getText()+"").equals("")&&!(etxt_pwd_conf.getText()+"").equals("") 
 							&&!(etxt_email.getText()+"").equals("") &&!(etxt_lat.getText()+"").equals("")
@@ -162,25 +156,23 @@ public class Driver extends Activity implements OnClickListener{
 					{
 						if(etxt_pwd.getText().toString().equals(etxt_pwd_conf.getText().toString()))
 						{
-						Intent i = new Intent(getApplicationContext() , Vendor_info.class);
-						Bundle b = new Bundle();
-						//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// 4 ---> phone
-						Double Locations[] = {Double.parseDouble(etxt_lat.getText().toString()) , Double.parseDouble(etxt_long.getText().toString())}; 
-						String title = etxt_name.getText().toString();
-						String info = etxt_email.getText().toString();
-						String phone = etxt_phone.getText().toString();
-						//adding vendor info to the DB
-						
-						
-						vendor.setName(title);
-						vendor.setPassword(etxt_pwd.getText().toString());
-						vendor.setLatitude(Locations[0]);
-						vendor.setLongitude(Locations[1]);
-						vendor.setEmail(info);
-						vendor.setPhone(phone);
-						b.putString("Vendor_Data", Locations[0]+","+Locations[1]+","+title+","+info+","+phone );
-						i.putExtras(b);
-						startActivity(i);
+							Intent i = new Intent(getApplicationContext() , Vendor_info.class);
+							Bundle b = new Bundle();
+							//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// 4 ---> phone
+							Double Locations[] = {Double.parseDouble(etxt_lat.getText().toString()) , Double.parseDouble(etxt_long.getText().toString())}; 
+							String title = etxt_name.getText().toString();
+							String info = etxt_email.getText().toString();
+							String phone = etxt_phone.getText().toString();
+							//adding vendor info to the DB
+							vendor.setName(title);
+							vendor.setPassword(etxt_pwd.getText().toString());
+							vendor.setLatitude(Locations[0]);
+							vendor.setLongitude(Locations[1]);
+							vendor.setEmail(info);
+							vendor.setPhone(phone);
+							b.putString("Vendor_Data", Locations[0]+","+Locations[1]+","+title+","+info+","+phone );
+							i.putExtras(b);
+							startActivity(i);
 						}
 						else
 						{
@@ -190,7 +182,7 @@ public class Driver extends Activity implements OnClickListener{
 					else{
 						Toast.makeText(getApplicationContext(), "Some Feilds Are Empty", Toast.LENGTH_SHORT).show();
 					}
-					
+
 				}
 			});
 			//////////////////

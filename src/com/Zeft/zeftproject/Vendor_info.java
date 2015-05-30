@@ -1,5 +1,8 @@
 package com.Zeft.zeftproject;
 
+import com.example.bdf.SQLite.SQLiteHelper;
+import com.example.bdf.data.Vendor;
+
 import maps.GoogleMapv2;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +25,8 @@ public class Vendor_info extends Activity {
 	private TextView txt_vendor_location_view;
 	private String B_data;
 	private String data[];
+	private SQLiteHelper db;
+	private Vendor vendor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -58,9 +63,11 @@ public class Vendor_info extends Activity {
 		}
 		else
 		{
-			//Use the DB
+			db=SQLiteHelper.getInstance(this);
+			vendor = new Vendor();
+					
 		}
-		//////////////////////////////////
+		////////////////////////////////// 
 		///lISTENERS
 		txt_view.setOnClickListener(new OnClickListener() {
 
