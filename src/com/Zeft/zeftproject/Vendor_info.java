@@ -23,7 +23,7 @@ public class Vendor_info extends Activity {
 	private TextView txt_vendor_email;
 	private TextView txt_vendor_location;
 	private TextView txt_vendor_location_view;
-	private String B_data;
+	private String B_data; 
 	private String data[];
 	private SQLiteHelper db;
 	private Vendor vendor;
