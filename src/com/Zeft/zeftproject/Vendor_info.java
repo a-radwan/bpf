@@ -65,7 +65,7 @@ public class Vendor_info extends Activity {
 		{
 			db=SQLiteHelper.getInstance(this);
 			vendor = new Vendor();
-					
+					 
 		}
 		////////////////////////////////// 
 		///lISTENERS
