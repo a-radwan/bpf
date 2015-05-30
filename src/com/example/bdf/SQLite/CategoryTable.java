@@ -22,8 +22,11 @@ class CategoryTable {
 	static final String[] COLUMNS = { KEY_ID, KEY_NAME };
 	static final int COL_ID = 0;
 	static final int COL_NAME= 1;
-
-
+     
+         
+	
+	
+	//sdfsdf
 	public static Category add(SQLiteDatabase db, Category category) {
 
 		ContentValues values = new ContentValues();
