@@ -23,7 +23,7 @@ class ProductTable {
 	static final int COL_NAME= 1;
 	static final int COL_CATEGORYID = 2;
 
-
+        
 	public static void add(SQLiteDatabase db, Product product) {
 
 		ContentValues values = new ContentValues();
