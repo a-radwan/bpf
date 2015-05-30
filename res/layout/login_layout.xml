@@ -12,12 +12,13 @@
         <TextView
             android:id="@+id/txt_Credintals"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:textColor="#fff"
             android:textStyle="bold|italic"
             android:text="enter your credentials"
             android:textSize="25sp"
+            android:gravity="center_horizontal|center_vertical"
             
             />
 
@@ -35,10 +36,10 @@
             android:layout_height="wrap_content"
             android:ems="10"
            android:layout_gravity="center"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textStyle="bold|italic"
             android:hint="UserName"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:inputType="text"
              >
 
@@ -56,11 +57,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textStyle="bold|italic"
             android:hint="Password"
-            android:textSize="25sp"
-            android:inputType="text"
+            android:textSize="15sp"
+            android:inputType="textPassword"
             android:layout_gravity="center"
              >
 
@@ -76,15 +77,13 @@
 
         <Button
             android:id="@+id/btn_login_in"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/choose_icon"
             android:gravity="center_horizontal|center_vertical"
             android:layout_gravity="center"
             
             
             />
-       
-        
     </LinearLayout>
 </LinearLayout>

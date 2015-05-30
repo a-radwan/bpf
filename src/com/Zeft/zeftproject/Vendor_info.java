@@ -27,6 +27,7 @@ public class Vendor_info extends Activity {
 	private String data[];
 	private SQLiteHelper db;
 	private Vendor vendor;
+	private int DB_bundle_id;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -51,21 +52,23 @@ public class Vendor_info extends Activity {
 		//////////////////////////
 		///Checking Bundle
 		Bundle bundle = this.getIntent().getExtras();  
-
+		
 		if(bundle !=null)
 		{
-			B_data = bundle.getString("Vendor_Data");
-			data = B_data.split(","); 
-			txt_vendor_name.setText(txt_vendor_name.getText().toString()+" "+data[2]);
-			txt_vendor_phone.setText(txt_vendor_phone.getText().toString()+" "+data[4]);
-			txt_vendor_email.setText(txt_vendor_email.getText().toString()+" "+data[3]);
-			txt_vendor_location.setText(txt_vendor_location.getText().toString()+" "+data[0]+","+data[1]);
+			DB_bundle_id = bundle.getInt("UserID");
+			if(!(DB_bundle_id+"").equals(""))
+			{
+				db=SQLiteHelper.getInstance(this);
+				vendor = db.getVendor(DB_bundle_id);
+				txt_vendor_name.setText(txt_vendor_name.getText().toString()+" "+vendor.getName());
+				txt_vendor_phone.setText(txt_vendor_phone.getText().toString()+" "+vendor.getPhone());
+				txt_vendor_email.setText(txt_vendor_email.getText().toString()+" "+vendor.getEmail());
+				txt_vendor_location.setText(txt_vendor_location.getText().toString()+" "+vendor.getLatitude()+","+vendor.getLatitude());
+			}
 		}
 		else
 		{
-			db=SQLiteHelper.getInstance(this);
-			vendor = new Vendor();
-					  
+			 
 		}
 		////////////////////////////////// 
 		///lISTENERS
@@ -81,18 +84,18 @@ public class Vendor_info extends Activity {
 			@Override
 			public void onClick(View v) 
 			{
-				if(!B_data.equals(""))
+				if(!(B_data+"").equals("") )
 				{
 					Intent i = new Intent(getApplicationContext() , GoogleMapv2.class);
 					Bundle b = new Bundle();
 					//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// Bundle Identifer
-					b.putString("Location", data[0]+","+data[1]+","+data[2]+","+data[3]+","+"view_info" );
+					b.putInt("VendorID", DB_bundle_id );
 					i.putExtras(b);
 					startActivity(i);
 				}
 				else
 				{
-					/////////No Bundle	
+					
 				}
 			}
 		});

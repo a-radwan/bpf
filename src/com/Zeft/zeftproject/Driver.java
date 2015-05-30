@@ -1,10 +1,14 @@
 package com.Zeft.zeftproject;
+import java.util.LinkedList;
+
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.UserProfile;
 import com.example.bdf.data.Vendor;
+import com.example.bdf.data.VendorHasProduct;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -28,6 +32,7 @@ public class Driver extends Activity implements OnClickListener{
 	private Dialog loginDialog;
 	private Button btn_signup;
 	private Vendor vendor;
+	private Button btn_search_for_products;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +47,7 @@ public class Driver extends Activity implements OnClickListener{
 		btn_log = (Button) findViewById(R.id.btn_login);
 		btn_bar = (Button) findViewById(R.id.btn_search_by_barcode);
 		btn_signup = (Button) findViewById(R.id.btn_signup);
+		btn_search_for_products = (Button) findViewById(R.id.btn_search_products);
 		txt_welcome = (TextView)  findViewById(R.id.txt_welcome);
 		spinner = (Spinner) findViewById(R.id.cat_spinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -57,6 +63,7 @@ public class Driver extends Activity implements OnClickListener{
 		////////////////////////////////////////
 		///LISTENERS
 		btn_bar.setOnClickListener(this);
+		btn_search_for_products.setOnClickListener(this);
 		btn_log.setOnClickListener(new OnClickListener() 
 		{
 			@Override
@@ -80,7 +87,11 @@ public class Driver extends Activity implements OnClickListener{
 
 						{
 							UserProfile.login(vendor.getId(), getApplicationContext());
-							startActivity(new Intent(getApplicationContext(),Vendor_info.class));
+							Intent i= new Intent(getApplicationContext(),Vendor_info.class);
+							Bundle b = new Bundle();
+							b.putInt("UserID", vendor.getId());
+							i.putExtras(b);
+							startActivity(i);
 							finish();
 							loginDialog.cancel();
 						}
@@ -112,6 +123,12 @@ public class Driver extends Activity implements OnClickListener{
 		{
 			IntentIntegrator scanIntegrator = new IntentIntegrator(this);
 			scanIntegrator.initiateScan();
+		}
+		if(v.getId() == R.id.btn_search_products)
+		{
+			Intent i = new Intent(getApplicationContext(),Search_for_product.class);
+			startActivity(i);
+			
 		}
 		if(v.getId() == R.id.btn_signup)
 		{
@@ -156,8 +173,7 @@ public class Driver extends Activity implements OnClickListener{
 					{
 						if(etxt_pwd.getText().toString().equals(etxt_pwd_conf.getText().toString()))
 						{
-							Intent i = new Intent(getApplicationContext() , Vendor_info.class);
-							Bundle b = new Bundle();
+							
 							//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// 4 ---> phone
 							Double Locations[] = {Double.parseDouble(etxt_lat.getText().toString()) , Double.parseDouble(etxt_long.getText().toString())}; 
 							String title = etxt_name.getText().toString();
@@ -170,9 +186,14 @@ public class Driver extends Activity implements OnClickListener{
 							vendor.setLongitude(Locations[1]);
 							vendor.setEmail(info);
 							vendor.setPhone(phone);
-							b.putString("Vendor_Data", Locations[0]+","+Locations[1]+","+title+","+info+","+phone );
+							db.addVendor(vendor);
+							Intent i= new Intent(getApplicationContext(),Vendor_info.class);
+							Bundle b = new Bundle();
+							b.putInt("UserID", vendor.getId());
+							Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
 							i.putExtras(b);
 							startActivity(i);
+							finish();
 						}
 						else
 						{
@@ -198,7 +219,24 @@ public class Driver extends Activity implements OnClickListener{
 		{
 			String scanContent = scanningResult.getContents();
 			String scanFormat = scanningResult.getFormatName();
-			Toast.makeText(getApplicationContext(), "Formate BarCode :"+scanFormat+" Content "+scanContent, Toast.LENGTH_LONG).show();
+			LinkedList<VendorHasProduct> hasit = db.getAllVendorsAndProducts();
+			
+			if(hasit.size() == 0)
+			{
+			 Toast.makeText(getApplicationContext(), "Empty No Data!", Toast.LENGTH_SHORT).show();	
+			}
+			else
+			{
+			for(int i=0 ; i < hasit.size() ; i++)
+			{
+				VendorHasProduct hasing = hasit.get(i);
+			if((hasing.getProductBarcode()+"").equals(scanContent))
+			{
+				Toast.makeText(getApplicationContext(), "Vendor Name: "+hasing.getVendorId()+" Price :"+hasing.getPrice()+" Barcode"+hasing.getProductBarcode(), Toast.LENGTH_SHORT).show();	
+			}
+			}
+			
+			}
 		}
 		else
 		{

@@ -6,19 +6,22 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="planets_array">
-        <item>Category</item>
+        <item>Search By Category</item>
         <item></item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>Food Supplies</item>
+        <item>Cleaners </item>
+        <item>Household Electrical</item>
+        <item>Meat</item>
+        <item>Housewares</item>
+        <item>Drinks</item>
+        <item>Clothing</item>
+        <item>Health and beauty</item>
     </string-array>
 
     <string name="title_activity_barcode_scanning_app">BarcodeScanningApp</string>
     <string name="title_activity_google_mapv2">GoogleMapv2</string>
     <string name="title_activity_vendor_add">VendorAdd</string>
     <string name="title_activity_vendor_info">Vendor_info</string>
+    <string name="title_activity_search_for_product">Search_for_product</string>
 
 </resources>

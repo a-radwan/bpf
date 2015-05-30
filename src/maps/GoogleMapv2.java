@@ -1,6 +1,8 @@
 package maps;
 
 import com.Zeft.zeftproject.R;
+import com.example.bdf.SQLite.SQLiteHelper;
+import com.example.bdf.data.Vendor;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -18,6 +20,9 @@ public class GoogleMapv2 extends Activity {
 
 	private GoogleMap map;
 	//    private final LatLng YOUR_LAT = new LatLng(latitude, longitude);
+	private int DB_bundle_id;
+	private SQLiteHelper db;
+	private Vendor vendor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +48,13 @@ public class GoogleMapv2 extends Activity {
 		if(bundle !=null)
 		{
 
-			String []temp = bundle.getString("Location").split(",");
-			if(temp[4].equalsIgnoreCase("view_info"))
-			AddMarker(Double.parseDouble(temp[0]), Double.parseDouble(temp[1]), temp[2], temp[3]);
+			DB_bundle_id = bundle.getInt("VendorID");
+			if(!(DB_bundle_id+"").equals(""))
+			{
+				db=SQLiteHelper.getInstance(this);
+				vendor = db.getVendor(DB_bundle_id);
+				AddMarker(vendor.getLatitude(), vendor.getLongitude(), vendor.getName(), vendor.getEmail());
+			}
 
 		}
 		else
