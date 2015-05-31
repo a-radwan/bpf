@@ -7,7 +7,6 @@
 
     <string-array name="planets_array">
         <item>Search By Category</item>
-        <item></item>
         <item>Food Supplies</item>
         <item>Cleaners </item>
         <item>Household Electrical</item>

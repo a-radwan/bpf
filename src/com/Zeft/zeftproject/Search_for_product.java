@@ -44,8 +44,8 @@ public class Search_for_product extends Activity  {
 		etxt_barcode.setTypeface(ttf);
 		//////////////////////////////
 		//LISTENERS///////////////////
-		btn_search.setOnClickListener(new OnClickListener() {
-
+		btn_search.setOnClickListener(new OnClickListener() 
+		{
 			@Override
 			public void onClick(View v)
 			{

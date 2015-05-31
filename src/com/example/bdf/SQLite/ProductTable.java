@@ -53,7 +53,7 @@ class ProductTable {
 		if (cursor.moveToFirst()) {
 					product.setBarcode(cursor.getString(COL_PRODUCT_BARCODE));
 					product.setName(cursor.getString(COL_NAME));
-					product.setCategoryId(cursor.getInt(COL_CATEGORYID));
+					product.setCategoryId(cursor.getString(COL_CATEGORYID));
 				
 				// Add book to books
 				products.add(product);
@@ -82,13 +82,10 @@ class ProductTable {
 		Product product=new Product();
 		product.setBarcode(cursor.getString(COL_PRODUCT_BARCODE));
 		product.setName(cursor.getString(COL_NAME));
-		product.setCategoryId(cursor.getInt(COL_CATEGORYID));
+		product.setCategoryId(cursor.getString(COL_CATEGORYID));
 		// db.close();
 		return product;
-
 	} 
-
-
 	public static void delete(SQLiteDatabase db, Product product) {
 		db.delete(TABLE_PRODUCTS, KEY_PRODUCT_BARCODE + " = ?",
 				new String[] { String.valueOf(product.getCategoryId()) });

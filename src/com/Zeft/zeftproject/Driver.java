@@ -1,8 +1,11 @@
 package com.Zeft.zeftproject;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
+import com.example.bdf.data.Category;
+import com.example.bdf.data.Product;
 import com.example.bdf.data.UserProfile;
 import com.example.bdf.data.Vendor;
 import com.example.bdf.data.VendorHasProduct;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.*;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class Driver extends Activity implements OnClickListener{
 	private Button btn_log;
@@ -33,27 +37,29 @@ public class Driver extends Activity implements OnClickListener{
 	private Button btn_signup;
 	private Vendor vendor;
 	private Button btn_search_for_products;
+	private Button btn_search_cat;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_driver);
 		/////////////////////////////////////////////
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
-		vendor = new Vendor();
-		VendorHasProduct has2 = new VendorHasProduct();
-		has2.setPrice(22);
-		has2.setProductBarcode("02854528");
-		has2.setVendorId(2);
-		db.addVendorHasProduct(has2);
+		Product pro = new Product();
+		pro.setCategoryId("Food Supplies");
+		pro.setBarcode("9780071271905");
+		pro.setName("Vegitables");
+		db.addProduct(pro);
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
-		db.addVendor(vendor);
+	
 		btn_log = (Button) findViewById(R.id.btn_login);
 		btn_bar = (Button) findViewById(R.id.btn_search_by_barcode);
 		btn_signup = (Button) findViewById(R.id.btn_signup);
 		btn_search_for_products = (Button) findViewById(R.id.btn_search_products);
 		txt_welcome = (TextView)  findViewById(R.id.txt_welcome);
+		btn_search_cat = (Button) findViewById(R.id.btn_search_cat);
 		spinner = (Spinner) findViewById(R.id.cat_spinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 				R.array.planets_array, R.layout.spinner_item);
@@ -103,7 +109,7 @@ public class Driver extends Activity implements OnClickListener{
 						else
 						{
 							Toast.makeText(getApplicationContext(), "Wrong username or password",Toast.LENGTH_SHORT).show();
-
+							
 						}
 
 					} 
@@ -117,13 +123,49 @@ public class Driver extends Activity implements OnClickListener{
 		});
 
 		btn_signup.setOnClickListener(this);
-
+		btn_search_cat.setOnClickListener(this);
+		
 
 	}
 
 	@Override
 	public void onClick(View v)
 	{
+		if(v.getId() == R.id.btn_search_cat)
+		{
+			
+			
+			if(spinner.getSelectedItem().toString().equals("") 
+					|| spinner.getSelectedItem().toString().equalsIgnoreCase("Search By Category"))
+			{
+				Toast.makeText(getApplicationContext(), "Chosse A Category", Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+				List<Product> products = db.getAllProducts();
+				Product pro = new Product();
+				if(products.size() == 0)
+				{
+					Toast.makeText(getApplicationContext(), "Empty Products Table" , Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+				 String found = "not";
+				 for(int i =0 ; i < products.size() ; i ++)
+				 {
+					 pro = products.get(i);
+					 if(pro.getCategoryId().equalsIgnoreCase(spinner.getSelectedItem().toString()))
+					 {
+						 found = "yes";
+						 Toast.makeText(getApplicationContext(), "BarCode"+pro.getBarcode(), Toast.LENGTH_SHORT).show();
+					 }
+				 } 
+				 if(found.equalsIgnoreCase("not"))
+					 Toast.makeText(getApplicationContext(), "No Matching Items" , Toast.LENGTH_SHORT).show();
+				}
+				
+			}
+		}
 		if(v.getId() == R.id.btn_search_by_barcode)
 		{
 			IntentIntegrator scanIntegrator = new IntentIntegrator(this);
@@ -255,5 +297,16 @@ public class Driver extends Activity implements OnClickListener{
 			toast.show();
 		}
 	}
+	public class MyOnItemSelectedListener implements OnItemSelectedListener {
 
+	    public void onItemSelected(AdapterView<?> parent,
+	        View view, int pos, long id) {
+	      Toast.makeText(spinner.getContext(), "The planet is " +
+	          spinner.getItemAtPosition(pos).toString(), Toast.LENGTH_LONG).show();
+	    }
+
+	    public void onNothingSelected(AdapterView parent) {
+	      // Do nothing.
+	    }
+	}
 }

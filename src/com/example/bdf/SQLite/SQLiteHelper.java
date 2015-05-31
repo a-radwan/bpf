@@ -28,12 +28,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static int OTHER_CATEGORY_ID;
 	public static int notificationFlag=0;
 	// Database Version
-	private static final int DATABASE_VERSION = 11;
+	private static final int DATABASE_VERSION = 12;
 	// Database Name
 	private static final String DATABASE_NAME = "bdfDB";
 
 	public static SQLiteHelper getInstance(Context context) {
-
 		if (sInstance == null) {
 			sInstance = new SQLiteHelper(context.getApplicationContext());
 			SQLiteHelper.context = context.getApplicationContext();

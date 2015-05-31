@@ -4,7 +4,7 @@ public class Product {
 
 	private String name;
 	private String barcode;
-	private  int categoryId;
+	private  String categoryId;
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -20,10 +20,10 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCategoryId() {
+	public String getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
 
