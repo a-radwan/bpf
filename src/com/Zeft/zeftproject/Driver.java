@@ -46,11 +46,7 @@ public class Driver extends Activity implements OnClickListener{
 		/////////////////////////////////////////////
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
-		Product pro = new Product();
-		pro.setCategoryId("Food Supplies");
-		pro.setBarcode("9780071271905");
-		pro.setName("Vegitables");
-		db.addProduct(pro);
+		vendor = new Vendor();
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
 	
@@ -220,13 +216,13 @@ public class Driver extends Activity implements OnClickListener{
 					{
 						if(etxt_pwd.getText().toString().equals(etxt_pwd_conf.getText().toString()))
 						{
-							
 							//// 0 --> lang //// 1 ---> long ////// 2 ---> title ////////// 3 ----> info  ///// 4 ---> phone
 							Double Locations[] = {Double.parseDouble(etxt_lat.getText().toString()) , Double.parseDouble(etxt_long.getText().toString())}; 
 							String title = etxt_name.getText().toString();
 							String info = etxt_email.getText().toString();
 							String phone = etxt_phone.getText().toString();
 							//adding vendor info to the DB
+							
 							vendor.setName(title);
 							vendor.setPassword(etxt_pwd.getText().toString());
 							vendor.setLatitude(Locations[0]);
