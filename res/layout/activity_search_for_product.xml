@@ -11,28 +11,11 @@
         android:layout_height="90dp"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Search For A Product"
+        android:text="Search For A Product Using BarCode"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold|italic" />
 
-
-    <EditText
-        android:id="@+id/etxt_prodctname"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:hint="Product Name"
-        android:textColorHint="#fff"
-        android:inputType="text"
-        android:textColor="#fff"
-        android:textSize="15sp"
-        android:textStyle="bold|italic" >
-
-        <requestFocus />
-    </EditText>
 
     <EditText
         android:id="@+id/etxt_barcode"
@@ -51,22 +34,7 @@
         <requestFocus />
     </EditText>
 
-    <EditText
-        android:id="@+id/etxt_price"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:hint="Price"
-        android:textColorHint="#fff"
-        android:inputType="number"
-        android:textColor="#fff"
-        android:textSize="15sp"
-        android:textStyle="bold|italic" >
-
-        <requestFocus />
-    </EditText>
+  
 
     <Button
         android:id="@+id/btn_search_for_products"

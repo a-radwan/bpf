@@ -41,6 +41,11 @@ public class Driver extends Activity implements OnClickListener{
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
 		vendor = new Vendor();
+		VendorHasProduct has2 = new VendorHasProduct();
+		has2.setPrice(22);
+		has2.setProductBarcode("02854528");
+		has2.setVendorId(2);
+		db.addVendorHasProduct(has2);
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
 		db.addVendor(vendor);
@@ -223,19 +228,24 @@ public class Driver extends Activity implements OnClickListener{
 			
 			if(hasit.size() == 0)
 			{
-			 Toast.makeText(getApplicationContext(), "Empty No Data!", Toast.LENGTH_SHORT).show();	
+			 Toast.makeText(getApplicationContext(), "Empty No Data! for Barcode : "+scanContent, Toast.LENGTH_SHORT).show();	
 			}
 			else
 			{
+			String Found = "not";
 			for(int i=0 ; i < hasit.size() ; i++)
 			{
 				VendorHasProduct hasing = hasit.get(i);
 			if((hasing.getProductBarcode()+"").equals(scanContent))
 			{
+				Found = "yes";
 				Toast.makeText(getApplicationContext(), "Vendor Name: "+hasing.getVendorId()+" Price :"+hasing.getPrice()+" Barcode"+hasing.getProductBarcode(), Toast.LENGTH_SHORT).show();	
 			}
 			}
-			
+			if(Found.equals("not"))
+			{
+				Toast.makeText(getApplicationContext(), "Not Found Barcode : "+scanContent, Toast.LENGTH_SHORT).show();		
+			}
 			}
 		}
 		else

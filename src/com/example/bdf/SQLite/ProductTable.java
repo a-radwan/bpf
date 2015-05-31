@@ -51,7 +51,7 @@ class ProductTable {
 		// 3. go over each row, build book and add it to list
 		Product product = new Product();
 		if (cursor.moveToFirst()) {
-					product.setBarcode(cursor.getInt(COL_PRODUCT_BARCODE));
+					product.setBarcode(cursor.getString(COL_PRODUCT_BARCODE));
 					product.setName(cursor.getString(COL_NAME));
 					product.setCategoryId(cursor.getInt(COL_CATEGORYID));
 				
@@ -80,13 +80,13 @@ class ProductTable {
 		if (cursor != null)
 			cursor.moveToFirst();
 		Product product=new Product();
-		product.setBarcode(cursor.getInt(COL_PRODUCT_BARCODE));
+		product.setBarcode(cursor.getString(COL_PRODUCT_BARCODE));
 		product.setName(cursor.getString(COL_NAME));
 		product.setCategoryId(cursor.getInt(COL_CATEGORYID));
 		// db.close();
 		return product;
 
-	}
+	} 
 
 
 	public static void delete(SQLiteDatabase db, Product product) {

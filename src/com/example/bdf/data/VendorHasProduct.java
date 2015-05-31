@@ -3,7 +3,7 @@ package com.example.bdf.data;
 public class VendorHasProduct {
 	private int id;
 	private int vendorId;
-	private int productBarcode;
+	private String productBarcode;
 	private double price;
 	public VendorHasProduct() {
 		// TODO Auto-generated constructor stub
@@ -25,11 +25,11 @@ public class VendorHasProduct {
 		this.vendorId = vendorId;
 	}
 
-	public int getProductBarcode() {
+	public String getProductBarcode() {
 		return productBarcode;
 	}
 
-	public void setProductBarcode(int productBarcode) {
+	public void setProductBarcode(String productBarcode) {
 		this.productBarcode = productBarcode;
 	}
 

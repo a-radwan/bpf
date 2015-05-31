@@ -28,7 +28,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static int OTHER_CATEGORY_ID;
 	public static int notificationFlag=0;
 	// Database Version
-	private static final int DATABASE_VERSION = 10;
+	private static final int DATABASE_VERSION = 11;
 	// Database Name
 	private static final String DATABASE_NAME = "bdfDB";
 
@@ -66,14 +66,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				+ "name TEXT )";
 
 		String CREATE_PRODUCT_TABLE = "CREATE TABLE products ( "
-				+ "barcode INTEGER PRIMARY KEY , " + "name TEXT, "
+				+ "barcode TEXT PRIMARY KEY , " + "name TEXT, "
 				+ "categoryid INTEGER, FOREIGN KEY (categoryid) REFERENCES categories (categoryid) )";
 
 
 
 		String CREATE_VENDOR_HAS_PRODUCT_TABLE = "CREATE TABLE  vendorhasproduct ( "
 				+ "hasid INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ "barcode integer, " 
+				+ "barcode TEXT, " 
 				+ "vid integer, "
 				+ "price DOUBLE, "
 				+ "FOREIGN KEY (barcode) REFERENCES products (exid), "

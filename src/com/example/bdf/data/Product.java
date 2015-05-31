@@ -3,15 +3,15 @@ package com.example.bdf.data;
 public class Product {
 
 	private String name;
-	private int barcode;
+	private String barcode;
 	private  int categoryId;
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
-	public int getBarcode() {
+	public String getBarcode() {
 		return barcode;
 	}
-	public void setBarcode(int barcode) {
+	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}
 	public String getName() {
