@@ -47,9 +47,12 @@ public class Driver extends Activity implements OnClickListener{
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
 		vendor = new Vendor();
+		vendor.setName("aa");
+		vendor.setPassword("aa");
+		db.addVendor(vendor);
+
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
-	
 		btn_log = (Button) findViewById(R.id.btn_login);
 		btn_bar = (Button) findViewById(R.id.btn_search_by_barcode);
 		btn_signup = (Button) findViewById(R.id.btn_signup);

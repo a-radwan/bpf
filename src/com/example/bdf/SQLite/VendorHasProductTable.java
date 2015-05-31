@@ -29,7 +29,9 @@ class VendorHasProductTable {
 
 
 	public static void add(SQLiteDatabase db, Vendor vendor,Product product,double price) {
-
+		if (!ProductTable.has(db, product.getBarcode())) {
+			ProductTable.add(db, product);
+		}
 		ContentValues values = new ContentValues();
 		values.put(KEY_VENDOR_ID, vendor.getId()); // get title
 		values.put(KEY_BARCODE , product.getBarcode());
@@ -85,7 +87,30 @@ class VendorHasProductTable {
 		// TODO Auto-generated method stub
 		LinkedList<VendorHasProduct>vendorHasProductList = new LinkedList<VendorHasProduct>();
 		// 1. build the query
-		String query = "SELECT  * FROM " + TABLE_VENDORS_HAS_PRODUCT +"WHARE "+KEY_BARCODE+"="+product.getBarcode();
+		String query = "SELECT  * FROM " + TABLE_VENDORS_HAS_PRODUCT +" where "+KEY_BARCODE+"="+product.getBarcode();
+
+		// 2. get reference to writable DB
+		Cursor cursor = db.rawQuery(query, null);
+
+		// 3. go over each row, build book and add it to list
+		VendorHasProduct vendorHasProduct = new VendorHasProduct();
+		if (cursor.moveToFirst()) {
+					vendorHasProduct.setId(cursor.getInt(COL_ID));
+					vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
+					vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
+					vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
+				// Add book to books
+					vendorHasProductList.add(vendorHasProduct);
+			} 
+		
+//		db.close();
+		return vendorHasProductList;
+	}
+	public static LinkedList<VendorHasProduct> getAll(SQLiteDatabase db,Vendor vendor) {
+		// TODO Auto-generated method stub
+		LinkedList<VendorHasProduct>vendorHasProductList = new LinkedList<VendorHasProduct>();
+		// 1. build the query
+		String query = "SELECT  * FROM " + TABLE_VENDORS_HAS_PRODUCT +" where "+KEY_VENDOR_ID+"="+vendor.getId();
 
 		// 2. get reference to writable DB
 		Cursor cursor = db.rawQuery(query, null);

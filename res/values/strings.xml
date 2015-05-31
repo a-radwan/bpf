@@ -4,6 +4,15 @@
     <string name="app_name">AppName</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="fresh_food">Fresh food</string>
+    <string name="food">Food</string>
+    <string name="electronics">Electronics</string>
+    <string name="home_appliances">Home appliances</string>
+    <string name="health_and_beauty">Health and beauty</string>
+    <string name="chocolates">Chocolates</string>
+    <string name="clothing">Clothing</string>
+    <string name="drinks">Drinks</string>
+    <string name="meat">Meat</string>
 
     <string-array name="planets_array">
         <item>Search By Category</item>
@@ -22,5 +31,7 @@
     <string name="title_activity_vendor_add">VendorAdd</string>
     <string name="title_activity_vendor_info">Vendor_info</string>
     <string name="title_activity_search_for_product">Search_for_product</string>
-
+    <string name="title_activity_products">Products</string>
+    
+    
 </resources>

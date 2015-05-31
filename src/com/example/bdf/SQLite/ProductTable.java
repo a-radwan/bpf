@@ -85,7 +85,29 @@ class ProductTable {
 		product.setCategoryId(cursor.getString(COL_CATEGORYID));
 		// db.close();
 		return product;
-	} 
+
+	}
+	public static boolean has(SQLiteDatabase db, String barcode) {
+		// 1. get reference to readable DB
+
+		// 2. build query
+		Cursor cursor = db.query(TABLE_PRODUCTS, // a. table
+				COLUMNS, // b. column names
+				KEY_PRODUCT_BARCODE + "= ?", // c. selections
+				new String[] { String.valueOf(barcode) }, // d. selections args
+				null, // e. group by
+				null, // f. having
+				null, // g. order by
+				null); // h. limit
+
+		// 3. if we got results get the first one
+
+			if(cursor.moveToFirst())
+			return true;
+		return false;
+	}
+
+
 	public static void delete(SQLiteDatabase db, Product product) {
 		db.delete(TABLE_PRODUCTS, KEY_PRODUCT_BARCODE + " = ?",
 				new String[] { String.valueOf(product.getCategoryId()) });

@@ -52,10 +52,14 @@ class CategoryTable {
 		// 3. go over each row, build book and add it to list
 		Category category = new Category();
 		if (cursor.moveToFirst()) {
-					category.setId(cursor.getInt(COL_ID));
+			do {
+				
+			category.setId(cursor.getInt(COL_ID));
 					category.setName(cursor.getString(COL_NAME));
 				// Add book to books
 				categorys.add(category);
+			} while (cursor.moveToNext());		
+
 			} 
 		
 //		db.close();

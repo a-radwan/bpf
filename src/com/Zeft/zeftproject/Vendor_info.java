@@ -1,5 +1,6 @@
 package com.Zeft.zeftproject;
 
+//import com.Zeft.zeftproject.ListView.Products;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Vendor;
 
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class Vendor_info extends Activity {
 	private SQLiteHelper db;
 	private Vendor vendor;
 	private int DB_bundle_id;
+	Button bAddProduct;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -41,6 +44,7 @@ public class Vendor_info extends Activity {
 		txt_vendor_email = (TextView) findViewById(R.id.txt_view_email);
 		txt_vendor_location = (TextView) findViewById(R.id.txt_view_Location);
 		txt_vendor_location_view = (TextView) findViewById(R.id.txt_view_Location_on_map);
+		bAddProduct=(Button)findViewById(R.id.bAddProduct);
 		///////////////////////////////////
 		//////TYPEFACING
 		Typeface ttf = Typeface.createFromAsset(getAssets(), "abc2.ttf");
@@ -76,7 +80,9 @@ public class Vendor_info extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Ahd Sho a7ot han", Toast.LENGTH_SHORT).show();
+//				Intent intent = new Intent(getApplicationContext(), Products.class);
+//				startActivity(intent);
+
 			}
 		});
 		txt_vendor_location_view.setOnClickListener(new OnClickListener() {
@@ -97,6 +103,15 @@ public class Vendor_info extends Activity {
 				{
 					
 				}
+			}
+		});
+		bAddProduct.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+//				Intent intent = new Intent(getApplicationContext(), AddProduct.class);
+//				startActivity(intent);
 			}
 		});
 	}

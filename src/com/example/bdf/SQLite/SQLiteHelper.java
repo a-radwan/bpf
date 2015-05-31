@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.Zeft.zeftproject.R;
 import com.example.bdf.data.Category;
 import com.example.bdf.data.Product;
 import com.example.bdf.data.Vendor;
@@ -29,6 +30,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static int notificationFlag=0;
 	// Database Version
 	private static final int DATABASE_VERSION = 12;
+
 	// Database Name
 	private static final String DATABASE_NAME = "bdfDB";
 
@@ -50,7 +52,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// SQL statement to create  tables
+		// SQL statement to create  tables 
 		String CREATE_VENDOR_TABLE = "CREATE TABLE vendors ( "
 				+ "vid INTEGER PRIMARY KEY AUTOINCREMENT, "
 				+ "name TEXT, " 
@@ -85,6 +87,38 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_PRODUCT_TABLE);
 		db.execSQL(CREATE_VENDOR_HAS_PRODUCT_TABLE);
 
+		Category category = new Category();
+		if (context != null) {
+			
+			category.setName(context.getString(R.string.home_appliances));
+			CategoryTable.add(db, category);
+			category.setName(context.getString(R.string.health_and_beauty));
+			CategoryTable.add(db, category);
+			category.setName(context.getString(R.string.clothing));
+			CategoryTable.add(db, category);
+			category.setName(context.getString(R.string.chocolates));
+			CategoryTable.add(db, category);
+			category.setName(context.getString(R.string.home_appliances));
+			CategoryTable.add(db, category);
+			category.setName(context.getString(R.string.drinks));
+			CategoryTable.add(db, category);
+			category.setName(context.getString(R.string.meat));
+			CategoryTable.add(db, category);
+
+
+			category.setName(context.getString(R.string.fresh_food));
+			CategoryTable.add(db, category);
+
+			category.setName(context.getString(R.string.food));
+			CategoryTable.add(db, category);
+
+			category.setName(context.getString(R.string.electronics));
+			CategoryTable.add(db, category);
+
+		}
+
+
+
 	}
 
 	@Override
@@ -110,7 +144,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 
 	public void addProduct(Product product) {
-		 ProductTable.add(this.getWritableDatabase(), product);
+		ProductTable.add(this.getWritableDatabase(), product);
 	}
 
 	public Product getProduct(int id) {
@@ -118,7 +152,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	}
 
 	// Get All Books
-	public List<Product> getAllProducts() {
+	public LinkedList<Product> getAllProducts() {
 		return ProductTable.getAll(this.getReadableDatabase());
 	}
 
@@ -127,7 +161,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		ProductTable.delete(this.getWritableDatabase(), product);
 
 	}
-
 	/******************************
 	 * ---------------------------------------------------------------------
 	 * ---------------------------------------------------------------------
@@ -151,7 +184,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 
 	// Get All Books
-	public List<Vendor> getAllIcomes() {
+	public LinkedList<Vendor> getAllIcomes() {
 		return VendorTable.getAll(this.getReadableDatabase());
 	}
 
@@ -182,12 +215,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public LinkedList<Category> getAllCategories() {
 		return CategoryTable.getAll(this.getReadableDatabase());
 	}
-
 	// Updating single book
-//	public int updateCategory(Category category) {
-//		return CategoryTable.update(this.getWritableDatabase(), category);
-//	}
-//
+	//	public int updateCategory(Category category) {
+	//		return CategoryTable.update(this.getWritableDatabase(), category);
+	//	}
+	//
 	// Deleting single book
 	public void deleteCategory(Category category) {
 		CategoryTable.delete(this.getWritableDatabase(), category);
@@ -203,10 +235,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	 * 
 	 ************************************/
 	public void addVendorHasProduct(Vendor vendor,Product product ,double price) {
-		 VendorHasProductTable.add(this.getWritableDatabase(), vendor,product,price);
+		VendorHasProductTable.add(this.getWritableDatabase(), vendor,product,price);
 	}
 	public void addVendorHasProduct(VendorHasProduct vendorHasProduct) {
-		 VendorHasProductTable.add(this.getWritableDatabase(), vendorHasProduct);
+		VendorHasProductTable.add(this.getWritableDatabase(), vendorHasProduct);
 	}
 
 	// Get All Books
@@ -215,6 +247,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	}
 	public LinkedList<VendorHasProduct> getAllVendorsAndProducts(Product product) {
 		return VendorHasProductTable.getAll(this.getReadableDatabase(),product);
+	}
+	public LinkedList<VendorHasProduct> getAllVendorsAndProducts(Vendor vendor) {
+		return VendorHasProductTable.getAll(this.getReadableDatabase(),vendor);
 	}
 
 

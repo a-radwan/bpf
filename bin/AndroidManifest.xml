@@ -68,6 +68,14 @@
             android:screenOrientation="portrait"
              >
         </activity>
+        <activity
+            android:name=".AddProduct"
+            android:label="@string/title_activity_vendor_info"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ListView.Products"
+            android:label="@string/title_activity_products"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
