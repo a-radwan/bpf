@@ -63,7 +63,7 @@ class ProductTable {
 		return products;
 	}
 
-	public static Product get(SQLiteDatabase db, int id) {
+	public static Product get(SQLiteDatabase db, String id) {
 		// 1. get reference to readable DB
 
 		// 2. build query

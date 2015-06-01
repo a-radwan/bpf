@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/llHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F4F4F2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="0dp"
+        android:paddingRight="10dp"
+        android:weightSum="100" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="80"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Name" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#F4F4F2"
+                android:orientation="horizontal"
+                android:showDividers="end"
+                android:weightSum="100" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/Bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="4dp"
+                        android:text="Barcode:"
+                        android:textColor="#A3A39D"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tvBarcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Barcode:"
+                        android:textColor="#A3A39D"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tvFollowersNO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="4dp"
+                        android:text="Category"
+                        android:textColor="#A3A39D"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Category"
+                        android:textColor="#A3A39D"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="20"
+            android:background="@drawable/price"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_marginLeft="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="200"
+                android:textColor="#FF942E" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

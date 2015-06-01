@@ -61,15 +61,12 @@
             android:name=".Vendor_info"
             android:label="@string/title_activity_vendor_info"
             android:screenOrientation="portrait" >
-<<<<<<< Upstream, based on origin/master
         </activity>
         <activity
             android:name=".Search_for_product"
             android:label="@string/title_activity_search_for_product"
             android:screenOrientation="portrait"
              >
-=======
->>>>>>> b1cb883 test
         </activity>
         <activity
             android:name=".AddProduct"
@@ -81,8 +78,4 @@
             android:screenOrientation="portrait" />
     </application>
 
-<<<<<<< Upstream, based on origin/master
 </manifest>
-=======
-</manifest>
->>>>>>> b1cb883 test

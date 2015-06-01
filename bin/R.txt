@@ -104,103 +104,61 @@ int drawable login_icon 0x7f020022
 int drawable password_icon 0x7f020023
 int drawable powered_by_google_dark 0x7f020024
 int drawable powered_by_google_light 0x7f020025
-<<<<<<< Upstream, based on origin/master
-int drawable reg_icon 0x7f020026
-int drawable scan_bar_code 0x7f020027
-int drawable search_for_car 0x7f020028
-int drawable search_for_products 0x7f020029
-int drawable view_info 0x7f02002a
-int id LinearLayout1 0x7f0c001b
-int id action_settings 0x7f0c003b
-=======
 int drawable price 0x7f020026
 int drawable reg_icon 0x7f020027
 int drawable scan_bar_code 0x7f020028
-int drawable view_info 0x7f020029
-int id Bar 0x7f0c0038
+int drawable search_for_car 0x7f020029
+int drawable search_for_products 0x7f02002a
+int drawable view_info 0x7f02002b
+int id Bar 0x7f0c003e
 int id LinearLayout1 0x7f0c0021
-int id action_settings 0x7f0c0043
->>>>>>> b1cb883 test
+int id action_settings 0x7f0c0049
 int id adjust_height 0x7f0c0000
 int id adjust_width 0x7f0c0001
-<<<<<<< Upstream, based on origin/master
-int id bAddProduct 0x7f0c0029
-=======
-int id bAddProduct 0x7f0c002a
+int id bAddProduct 0x7f0c0030
 int id bBarcode 0x7f0c001a
 int id bOk 0x7f0c001d
->>>>>>> b1cb883 test
 int id book_now 0x7f0c0010
-<<<<<<< Upstream, based on origin/master
-int id btn_login 0x7f0c0021
-int id btn_login_in 0x7f0c0034
-int id btn_search_by_barcode 0x7f0c0020
-int id btn_search_cat 0x7f0c001f
-int id btn_search_for_products 0x7f0c0027
-int id btn_search_products 0x7f0c0022
-int id btn_signup 0x7f0c0023
-=======
-int id btn_login 0x7f0c0025
-int id btn_login_in 0x7f0c0035
-int id btn_search_by_barcode 0x7f0c0024
-int id btn_signup 0x7f0c0026
->>>>>>> b1cb883 test
+int id btn_login 0x7f0c0027
+int id btn_login_in 0x7f0c003b
+int id btn_search_by_barcode 0x7f0c0026
+int id btn_search_cat 0x7f0c0025
+int id btn_search_for_products 0x7f0c002e
+int id btn_search_products 0x7f0c0028
+int id btn_signup 0x7f0c0029
 int id buyButton 0x7f0c000c
 int id buy_now 0x7f0c0011
 int id buy_with_google 0x7f0c0012
-<<<<<<< Upstream, based on origin/master
-int id cat_spinner 0x7f0c001e
-=======
-int id cat_spinner 0x7f0c0023
->>>>>>> b1cb883 test
+int id cat_spinner 0x7f0c0024
 int id classic 0x7f0c0014
 int id donate_with_google 0x7f0c0013
-<<<<<<< Upstream, based on origin/master
-int id etxt_barcode 0x7f0c0026
-int id etxt_lat 0x7f0c0039
-int id etxt_longitude 0x7f0c003a
-int id etxt_name 0x7f0c0035
-int id etxt_pwd 0x7f0c0033
-int id etxt_pwd_conf 0x7f0c0036
-int id etxt_pwd_email 0x7f0c0038
-int id etxt_pwd_phone 0x7f0c0037
-int id etxt_username 0x7f0c0032
-=======
 int id etBarcode 0x7f0c0019
 int id etName 0x7f0c0018
 int id etPrice 0x7f0c001b
-int id etxt_lat 0x7f0c0041
-int id etxt_longitude 0x7f0c0042
-int id etxt_name 0x7f0c003d
-int id etxt_pwd 0x7f0c0034
-int id etxt_pwd_conf 0x7f0c003e
-int id etxt_pwd_email 0x7f0c0040
-int id etxt_pwd_phone 0x7f0c003f
-int id etxt_username 0x7f0c0033
->>>>>>> b1cb883 test
+int id etxt_barcode 0x7f0c002d
+int id etxt_lat 0x7f0c0047
+int id etxt_longitude 0x7f0c0048
+int id etxt_name 0x7f0c0043
+int id etxt_pwd 0x7f0c003a
+int id etxt_pwd_conf 0x7f0c0044
+int id etxt_pwd_email 0x7f0c0046
+int id etxt_pwd_phone 0x7f0c0045
+int id etxt_username 0x7f0c0039
 int id grayscale 0x7f0c0015
 int id holo_dark 0x7f0c0007
 int id holo_light 0x7f0c0008
 int id hybrid 0x7f0c0003
-<<<<<<< Upstream, based on origin/master
-int id map 0x7f0c0024
-=======
-int id llHeader 0x7f0c0036
-int id lvProducts 0x7f0c0028
-int id map 0x7f0c0027
->>>>>>> b1cb883 test
+int id llHeader 0x7f0c003c
+int id lvProducts 0x7f0c002b
+int id map 0x7f0c002a
 int id match_parent 0x7f0c000e
 int id monochrome 0x7f0c0016
 int id none 0x7f0c0002
 int id normal 0x7f0c0004
 int id production 0x7f0c0009
-<<<<<<< Upstream, based on origin/master
-int id relative 0x7f0c0028
-int id relative2 0x7f0c002e
-=======
-int id relative 0x7f0c0029
-int id relative2 0x7f0c002f
->>>>>>> b1cb883 test
+int id relative 0x7f0c002f
+int id relative2 0x7f0c0035
+int id sCategory 0x7f0c001c
 int id sandbox 0x7f0c000a
 int id satellite 0x7f0c0005
 int id scan_button 0x7f0c001e
@@ -208,63 +166,37 @@ int id scan_content 0x7f0c0020
 int id scan_format 0x7f0c001f
 int id selectionDetails 0x7f0c000d
 int id slide 0x7f0c0017
-<<<<<<< Upstream, based on origin/master
-int id spiner 0x7f0c001d
-=======
-int id spCategory 0x7f0c001c
->>>>>>> b1cb883 test
+int id spiner 0x7f0c0023
 int id strict_sandbox 0x7f0c000b
 int id terrain 0x7f0c0006
-<<<<<<< Upstream, based on origin/master
-int id txt_Credintals 0x7f0c0031
-int id txt_header_pro 0x7f0c0025
-int id txt_view_Location 0x7f0c002f
-int id txt_view_Location_on_map 0x7f0c0030
-int id txt_view_email 0x7f0c002c
-int id txt_view_name 0x7f0c002b
-int id txt_view_phone 0x7f0c002d
-int id txt_view_products 0x7f0c002a
-int id txt_welcome 0x7f0c001c
-=======
-int id tvBarcode 0x7f0c0039
-int id tvCategory 0x7f0c003b
-int id tvFollowersNO 0x7f0c003a
-int id tvPrice 0x7f0c003c
-int id tvProductName 0x7f0c0037
-int id txt_Credintals 0x7f0c0032
-int id txt_view_Location 0x7f0c0030
-int id txt_view_Location_on_map 0x7f0c0031
-int id txt_view_email 0x7f0c002d
-int id txt_view_name 0x7f0c002c
-int id txt_view_phone 0x7f0c002e
-int id txt_view_products 0x7f0c002b
+int id tvBarcode 0x7f0c003f
+int id tvCategory 0x7f0c0041
+int id tvFollowersNO 0x7f0c0040
+int id tvPrice 0x7f0c0042
+int id tvProductName 0x7f0c003d
+int id txt_Credintals 0x7f0c0038
+int id txt_header_pro 0x7f0c002c
+int id txt_view_Location 0x7f0c0036
+int id txt_view_Location_on_map 0x7f0c0037
+int id txt_view_email 0x7f0c0033
+int id txt_view_name 0x7f0c0032
+int id txt_view_phone 0x7f0c0034
+int id txt_view_products 0x7f0c0031
 int id txt_welcome 0x7f0c0022
->>>>>>> b1cb883 test
 int id wrap_content 0x7f0c000f
 int integer google_play_services_version 0x7f080000
-<<<<<<< Upstream, based on origin/master
-int layout activity_barcode_scanning_app 0x7f030000
-int layout activity_driver 0x7f030001
-int layout activity_google_mapv2 0x7f030002
-int layout activity_search_for_product 0x7f030003
-int layout activity_vendor_add 0x7f030004
-int layout activity_vendor_info 0x7f030005
-int layout login_layout 0x7f030006
-int layout sign_up 0x7f030007
-int layout spinner_item 0x7f030008
-=======
 int layout activity_add_product 0x7f030000
 int layout activity_barcode_scanning_app 0x7f030001
 int layout activity_driver 0x7f030002
 int layout activity_google_mapv2 0x7f030003
 int layout activity_products 0x7f030004
-int layout activity_vendor_add 0x7f030005
-int layout activity_vendor_info 0x7f030006
-int layout login_layout 0x7f030007
-int layout product_component 0x7f030008
-int layout sign_up 0x7f030009
-int layout spinner_item 0x7f03000a
->>>>>>> b1cb883 test
+int layout activity_search_for_product 0x7f030005
+int layout activity_vendor_add 0x7f030006
+int layout activity_vendor_info 0x7f030007
+int layout login_layout 0x7f030008
+int layout product_component 0x7f030009
+int layout sign_up 0x7f03000a
+int layout spinner_item 0x7f03000b
 int menu driver 0x7f0b0000
 int menu google_mapv2 0x7f0b0001
 int menu search_for_product 0x7f0b0002
@@ -322,12 +254,8 @@ int string store_picture_message 0x7f060001
 int string store_picture_title 0x7f060000
 int string title_activity_barcode_scanning_app 0x7f060032
 int string title_activity_google_mapv2 0x7f060033
-<<<<<<< Upstream, based on origin/master
 int string title_activity_products 0x7f060037
 int string title_activity_search_for_product 0x7f060036
-=======
-int string title_activity_products 0x7f060036
->>>>>>> b1cb883 test
 int string title_activity_vendor_add 0x7f060034
 int string title_activity_vendor_info 0x7f060035
 int string wallet_buy_button_place_holder 0x7f060025

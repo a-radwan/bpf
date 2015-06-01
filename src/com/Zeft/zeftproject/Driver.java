@@ -132,8 +132,6 @@ public class Driver extends Activity implements OnClickListener{
 	{
 		if(v.getId() == R.id.btn_search_cat)
 		{
-			
-			
 			if(spinner.getSelectedItem().toString().equals("") 
 					|| spinner.getSelectedItem().toString().equalsIgnoreCase("Search By Category"))
 			{
@@ -195,7 +193,6 @@ public class Driver extends Activity implements OnClickListener{
 			final EditText etxt_long = (EditText) d.findViewById(R.id.etxt_longitude);
 			Button btn_sign = (Button) d.findViewById(R.id.btn_login_in);
 			///////////////////////////////
-			////TYPEFACING
 			txt_header.setTypeface(typeface2);
 			etxt_name.setTypeface(typeface2);
 			etxt_pwd.setTypeface(typeface2);

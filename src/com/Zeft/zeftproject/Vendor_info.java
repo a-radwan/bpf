@@ -1,6 +1,7 @@
 package com.Zeft.zeftproject;
 
 //import com.Zeft.zeftproject.ListView.Products;
+import com.Zeft.zeftproject.ListView.Products;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Vendor;
 
@@ -80,8 +81,8 @@ public class Vendor_info extends Activity {
 
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(getApplicationContext(), Products.class);
-//				startActivity(intent);
+				Intent intent = new Intent(getApplicationContext(), Products.class);
+				startActivity(intent);
 
 			}
 		});
@@ -110,8 +111,8 @@ public class Vendor_info extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-//				Intent intent = new Intent(getApplicationContext(), AddProduct.class);
-//				startActivity(intent);
+				Intent intent = new Intent(getApplicationContext(), AddProduct.class);
+				startActivity(intent);
 			}
 		});
 	}
