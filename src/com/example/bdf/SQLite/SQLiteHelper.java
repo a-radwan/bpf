@@ -70,7 +70,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				+ "barcode TEXT PRIMARY KEY , " + "name TEXT, "
 				+ "categoryid INTEGER, FOREIGN KEY (categoryid) REFERENCES categories (categoryid) )";
 
-
+   
 
 		String CREATE_VENDOR_HAS_PRODUCT_TABLE = "CREATE TABLE  vendorhasproduct ( "
 				+ "hasid INTEGER PRIMARY KEY AUTOINCREMENT, "
