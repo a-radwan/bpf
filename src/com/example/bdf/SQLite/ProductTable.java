@@ -77,13 +77,15 @@ class ProductTable {
 				null); // h. limit
 
 		// 3. if we got results get the first one
-		if (cursor != null)
-			cursor.moveToFirst();
 		Product product=new Product();
+
+		if (cursor != null)
+		if(	cursor.moveToFirst()){
 		product.setBarcode(cursor.getString(COL_PRODUCT_BARCODE));
 		product.setName(cursor.getString(COL_NAME));
 		product.setCategoryId(cursor.getString(COL_CATEGORYID));
 		// db.close();
+		}
 		return product;
 
 	}

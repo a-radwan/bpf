@@ -32,6 +32,7 @@ public class Vendor_info extends Activity {
 	private Vendor vendor;
 	private int DB_bundle_id;
 	Button bAddProduct;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -45,6 +46,7 @@ public class Vendor_info extends Activity {
 		txt_vendor_location = (TextView) findViewById(R.id.txt_view_Location);
 		txt_vendor_location_view = (TextView) findViewById(R.id.txt_view_Location_on_map);
 		bAddProduct=(Button)findViewById(R.id.bAddProduct);
+		txt_view = (TextView) findViewById(R.id.txt_view_products);
 		///////////////////////////////////
 		//////TYPEFACING//////////////////
 		Typeface ttf = Typeface.createFromAsset(getAssets(), "abc2.ttf");
@@ -104,6 +106,15 @@ public class Vendor_info extends Activity {
 				startActivity(intent);
 			}
 		});
+		txt_view.setOnClickListener(new OnClickListener() {
+			
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getApplicationContext(), Products.class);
+							startActivity(intent);
+			
+						}
+					});
 	}
 	public void AddInfo(String txt_name , String txt_phone , String txt_email , String txt_location)
 	{

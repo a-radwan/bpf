@@ -5,6 +5,9 @@ import java.util.List;
 import maps.GoogleMapv2;
 
 import com.Zeft.zeftproject.R;
+import com.Zeft.zeftproject.ListView.SearchCategoryProducts;
+import com.Zeft.zeftproject.ListView.SearchProductAdapter;
+import com.Zeft.zeftproject.ListView.SearchProducts;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Category;
 import com.example.bdf.data.Product;
@@ -120,7 +123,7 @@ public class Driver extends Activity implements OnClickListener{
 						else
 						{
 							Toast.makeText(getApplicationContext(), "Wrong username or password",Toast.LENGTH_SHORT).show();
-							
+
 						}
 
 					} 
@@ -135,10 +138,10 @@ public class Driver extends Activity implements OnClickListener{
 
 		btn_signup.setOnClickListener(this);
 		btn_search_cat.setOnClickListener(this);
-		
+
 
 	}
-    
+
 	@Override
 	public void onClick(View v)
 	{
@@ -151,28 +154,13 @@ public class Driver extends Activity implements OnClickListener{
 			}
 			else
 			{
-				List<Product> products = db.getAllProducts();
-				Product pro = new Product();
-				if(products.size() == 0)
-				{
-					Toast.makeText(getApplicationContext(), "Empty Products Table" , Toast.LENGTH_SHORT).show();
-				}
-				else
-				{
-				 String found = "not";
-				 for(int i =0 ; i < products.size() ; i ++)
-				 {
-					 pro = products.get(i);
-					 if(pro.getCategoryId().equalsIgnoreCase(spinner.getSelectedItem().toString()))
-					 {
-						 found = "yes";
-						 Toast.makeText(getApplicationContext(), "BarCode"+pro.getBarcode(), Toast.LENGTH_SHORT).show();
-					 }
-				 } 
-				 if(found.equalsIgnoreCase("not"))
-					 Toast.makeText(getApplicationContext(), "No Matching Items" , Toast.LENGTH_SHORT).show();
-				}
-				
+				Intent i = new Intent(getApplicationContext() , SearchCategoryProducts.class);
+			     Bundle b = new Bundle();
+			     b.putString("category", (String)spinner.getSelectedItem());
+			     i.putExtras(b);
+			     startActivity(i);			
+
+
 			}
 		}
 		if(v.getId() == R.id.btn_search_by_barcode)
@@ -184,7 +172,7 @@ public class Driver extends Activity implements OnClickListener{
 		{
 			Intent i = new Intent(getApplicationContext(),Search_for_product.class);
 			startActivity(i);
-			
+
 		}
 		if(v.getId() == R.id.btn_signup)
 		{
@@ -205,19 +193,19 @@ public class Driver extends Activity implements OnClickListener{
 			final EditText etxt_long = (EditText) d.findViewById(R.id.etxt_longitude);
 			Button btn_sign = (Button) d.findViewById(R.id.btn_login_in);
 			// check if GPS enabled
-	        GPSTracker gpsTracker = new GPSTracker(this);
-	        if (gpsTracker.getIsGPSTrackingEnabled())
-	        {
-	            stringLatitude = String.valueOf(gpsTracker.latitude);
-	            stringLongitude = String.valueOf(gpsTracker.longitude);
-	            etxt_lat.setText(stringLatitude);
-	            etxt_long.setText(stringLongitude);
-	            
-	        }
-	        else
-	        {
-	        	 Toast.makeText(getApplicationContext(), "Problem Of Finding Your Location , Add it Manually" , Toast.LENGTH_SHORT).show();
-	        }
+			GPSTracker gpsTracker = new GPSTracker(this);
+			if (gpsTracker.getIsGPSTrackingEnabled())
+			{
+				stringLatitude = String.valueOf(gpsTracker.latitude);
+				stringLongitude = String.valueOf(gpsTracker.longitude);
+				etxt_lat.setText(stringLatitude);
+				etxt_long.setText(stringLongitude);
+
+			}
+			else
+			{
+				Toast.makeText(getApplicationContext(), "Problem Of Finding Your Location , Add it Manually" , Toast.LENGTH_SHORT).show();
+			}
 			///////////////////////////////
 			txt_header.setTypeface(typeface2);
 			etxt_name.setTypeface(typeface2);
@@ -248,7 +236,7 @@ public class Driver extends Activity implements OnClickListener{
 							String info = etxt_email.getText().toString();
 							String phone = etxt_phone.getText().toString();
 							//adding vendor info to the DB
-							
+
 							vendor.setName(title);
 							vendor.setPassword(etxt_pwd.getText().toString());
 							vendor.setLatitude(Locations[0]);
@@ -259,7 +247,7 @@ public class Driver extends Activity implements OnClickListener{
 							Intent i= new Intent(getApplicationContext(),Vendor_info.class);
 							Bundle b = new Bundle();
 							b.putInt("UserID", vendor.getId());
-						//	Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
+							//	Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
 							i.putExtras(b);
 							startActivity(i);
 							finish();
@@ -288,37 +276,20 @@ public class Driver extends Activity implements OnClickListener{
 		{
 			String scanContent = scanningResult.getContents();
 			String scanFormat = scanningResult.getFormatName();
-			LinkedList<VendorHasProduct> hasit = db.getAllVendorsAndProducts();
 			if((scanContent.subSequence(0, 3)+"").equalsIgnoreCase("729"))
-		    {
-		    	Dialog d = new Dialog(Driver.this);
-		    	d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		    	d.setContentView(R.layout.alerting_il);
-		    	d.show();
-		    }
+			{
+				Dialog d = new Dialog(Driver.this);
+				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				d.setContentView(R.layout.alerting_il);
+				d.show();
+			}
 			else{
-			if(hasit.size() == 0)
-			{
-			 Toast.makeText(getApplicationContext(), "Empty No Data! for Barcode : "+scanContent, Toast.LENGTH_SHORT).show();	
-			}
-			else
-			{
-			String Found = "not";
-			for(int i=0 ; i < hasit.size() ; i++)
-			{
-				VendorHasProduct hasing = hasit.get(i);
-			if((hasing.getProductBarcode()+"").equals(scanContent))
-			{
-				Found = "yes";
-				Toast.makeText(getApplicationContext(), "Vendor Name: "+hasing.getVendorId()+" Price :"+hasing.getPrice()+" Barcode"+hasing.getProductBarcode(), Toast.LENGTH_SHORT).show();	
-			}
-			}
-			if(Found.equals("not"))
-			{
-				Toast.makeText(getApplicationContext(), "Not Found Barcode : "+scanContent, Toast.LENGTH_SHORT).show();		
-			}
-			}
-		}
+				Intent i = new Intent(getApplicationContext() , SearchProducts.class);
+			     Bundle b = new Bundle();
+			     b.putString("barcode", scanContent );
+			     i.putExtras(b);
+			     startActivity(i);			
+			     }
 		}
 		else
 		{
@@ -329,14 +300,14 @@ public class Driver extends Activity implements OnClickListener{
 	}
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {
 
-	    public void onItemSelected(AdapterView<?> parent,
-	        View view, int pos, long id) {
-	      Toast.makeText(spinner.getContext(), "The planet is " +
-	          spinner.getItemAtPosition(pos).toString(), Toast.LENGTH_LONG).show();
-	    }
+		public void onItemSelected(AdapterView<?> parent,
+				View view, int pos, long id) {
+			Toast.makeText(spinner.getContext(), "The planet is " +
+					spinner.getItemAtPosition(pos).toString(), Toast.LENGTH_LONG).show();
+		}
 
-	    public void onNothingSelected(AdapterView parent) {
-	      // Do nothing.
-	    }
+		public void onNothingSelected(AdapterView parent) {
+			// Do nothing.
+		}
 	}
 }

@@ -78,6 +78,14 @@
             android:name=".ListView.Products"
             android:label="@string/title_activity_products"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ListView.SearchCategoryProducts"
+            android:label="@string/title_activity_products"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ListView.SearchProducts"
+            android:label="@string/title_activity_products"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -55,7 +55,7 @@ public class ProductAdapter extends BaseAdapter implements ListAdapter{
 							
 					TextView category = (TextView) rowView
 							.findViewById(R.id.tvCategory);
-					//category.setText(db.getCategory(product.getCategoryId()).getName());
+					category.setText(product.getCategoryId());
 					TextView price = (TextView) rowView
 							.findViewById(R.id.tvPrice);
 					price.setText(vendorHasProduct.getPrice() + "");

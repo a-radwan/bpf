@@ -1,6 +1,7 @@
 package com.Zeft.zeftproject.ListView;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
@@ -17,7 +18,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.*;
@@ -27,6 +31,8 @@ public class Products extends Activity implements OnClickListener{
 	ListView lvProducts;
 	Vendor vendor;
 	SQLiteHelper db;
+	private int infoPosition;
+
 	LinkedList<VendorHasProduct> vendorProducts;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +70,56 @@ public class Products extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		infoPosition = info.position;
+		menu.setHeaderTitle("Product Options");
+	
+		
+		getMenuInflater().inflate(R.menu.driver,menu);
+		
+
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+
+		 if ((item.getTitle().toString())
+				.equals("delete")) {
+			deleteExp(vendorProducts.get(infoPosition));
+
+			Toast.makeText(getApplicationContext(), "deleted", Toast.LENGTH_SHORT).show();
+		 }
+		 else {
+			Toast.makeText(getApplicationContext(), item.getTitle() + " wrong",
+					Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		return true;
+	}
+
+	private void deleteExp(VendorHasProduct vb) {
+		db.deleteVendorHasProduct(vb);
+		this.onResume();
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		lvProducts.setAdapter(null);
+		vendor = UserProfile.getCurrntUser();
+		vendorProducts=db.getAllVendorsAndProducts(vendor);
+		ProductAdapter productAdapter = new ProductAdapter(getApplicationContext(), vendorProducts);
+
+		lvProducts.setAdapter(productAdapter);
+
+		registerForContextMenu(lvProducts);
+	}
+
+
 
 }

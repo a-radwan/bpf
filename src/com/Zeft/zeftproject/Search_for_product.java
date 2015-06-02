@@ -2,6 +2,7 @@ package com.Zeft.zeftproject;
 
 import java.util.LinkedList;
 
+import com.Zeft.zeftproject.ListView.SearchProducts;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.VendorHasProduct;
 
@@ -10,6 +11,7 @@ import android.app.Activity;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -62,31 +64,18 @@ public class Search_for_product extends Activity  {
 			    	d.setContentView(R.layout.alerting_il);
 			    	d.show();
 			    }
-			    else{
-			    if(vhas.size() == 0)
-		    	{
-		    		Toast.makeText(getApplicationContext(), "Empty DB!" , Toast.LENGTH_SHORT).show();
-		    	}
 			    else
 			    {
-			    	String found = "not";
-			    for(int i=0; i < vhas.size() ; i ++ )
-			    {
-			    	hasing = vhas.get(i);
-			    	if((hasing.getProductBarcode()+"").equals(etxt_barcode.getText().toString()) )
-			    	{
-			    		found = "yes";
-			    		Toast.makeText(getApplicationContext(), "Found IT", Toast.LENGTH_SHORT).show();
-			    	}
-			    	
-			    	
+					Intent i = new Intent(getApplicationContext() , SearchProducts.class);
+				     Bundle b = new Bundle();
+				     b.putString("barcode", etxt_barcode.getText().toString() );
+				     i.putExtras(b);
+				     startActivity(i);			
+
+			    
+			   
 			    }
-			    if(found.equalsIgnoreCase("not"))
-			    {
-			    	Toast.makeText(getApplicationContext(), "DID'nt Found IT", Toast.LENGTH_SHORT).show();	
-			    }
-			    }
-			 }
+			 
 			 }
 			 else
 			 {

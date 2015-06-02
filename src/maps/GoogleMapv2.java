@@ -7,6 +7,7 @@ import com.example.bdf.data.Vendor;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -52,22 +53,24 @@ public class GoogleMapv2 extends Activity {
 		Bundle bundle = this.getIntent().getExtras();  
 
 		if(bundle !=null)
-		{
+		  {
 
-			DB_bundle_id = bundle.getInt("VendorID");
-			if(!(DB_bundle_id+"").equals(""))
-			{
-				db=SQLiteHelper.getInstance(this);
-				vendor = db.getVendor(DB_bundle_id);
-				AddMarker(vendor.getLatitude(), vendor.getLongitude(), vendor.getName(), vendor.getEmail());
-			}
+		   DB_bundle_id = bundle.getInt("VendorID");
+		   if(!(DB_bundle_id+"").equals(""))
+		   {
+		    db=SQLiteHelper.getInstance(this);
+		    vendor = db.getVendor(DB_bundle_id);
+		    AddMarker(vendor.getLatitude(), vendor.getLongitude(), vendor.getName(), vendor.getEmail());
+		   }
+		      
 
-		}
-		else
-		{
-		 //use DB	
-		}
-
+		  }
+		  else
+		  {
+		   AddMarker2(30.9700467,34.28733,"SuperMarket","10");
+		   AddMarker2(31.9700467,32.26733,"SuperMarket2","11");
+		   AddMarker(29.1700467,36.38733,"SuperMarket3","9");
+		  }
 	}
 	public GoogleMap getMap()
 	{
@@ -82,4 +85,14 @@ public class GoogleMapv2 extends Activity {
 		.title(Title)
 		.snippet(info));
 	}
+	public void AddMarker2(double lat , double longitude , String Title , String info)
+	 {
+
+	  Marker perth = map.addMarker(new MarkerOptions()
+	  .position(new LatLng(lat,longitude))
+	  .draggable(true)
+	  .title(Title)
+	  .snippet(info)
+	  .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+	 }
 }
