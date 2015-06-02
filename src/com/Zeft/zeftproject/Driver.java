@@ -206,7 +206,6 @@ public class Driver extends Activity implements OnClickListener{
 			Button btn_sign = (Button) d.findViewById(R.id.btn_login_in);
 			// check if GPS enabled
 	        GPSTracker gpsTracker = new GPSTracker(this);
-
 	        if (gpsTracker.getIsGPSTrackingEnabled())
 	        {
 	            stringLatitude = String.valueOf(gpsTracker.latitude);
