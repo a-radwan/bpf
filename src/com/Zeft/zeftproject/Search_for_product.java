@@ -9,12 +9,14 @@ import android.R.color;
 import android.app.Activity;
 
 
+import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,7 +55,14 @@ public class Search_for_product extends Activity  {
 			 {
 			    LinkedList<VendorHasProduct> vhas = db.getAllVendorsAndProducts();
 			    VendorHasProduct hasing = new VendorHasProduct();
-			    
+			    if((etxt_barcode.getText().toString().subSequence(0, 3)+"").equalsIgnoreCase("729"))
+			    {
+			    	Dialog d = new Dialog(Search_for_product.this);
+			    	d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			    	d.setContentView(R.layout.alerting_il);
+			    	d.show();
+			    }
+			    else{
 			    if(vhas.size() == 0)
 		    	{
 		    		Toast.makeText(getApplicationContext(), "Empty DB!" , Toast.LENGTH_SHORT).show();
@@ -78,6 +87,7 @@ public class Search_for_product extends Activity  {
 			    }
 			    }
 			 }
+			 }
 			 else
 			 {
 				 Toast.makeText(getApplicationContext(), "Empty Feild BarCode" , Toast.LENGTH_SHORT).show();
@@ -85,6 +95,5 @@ public class Search_for_product extends Activity  {
 			}
 		});
 	}
-
 
 }

@@ -263,7 +263,14 @@ public class Driver extends Activity implements OnClickListener{
 			String scanContent = scanningResult.getContents();
 			String scanFormat = scanningResult.getFormatName();
 			LinkedList<VendorHasProduct> hasit = db.getAllVendorsAndProducts();
-			
+			if((scanContent.subSequence(0, 3)+"").equalsIgnoreCase("729"))
+		    {
+		    	Dialog d = new Dialog(Driver.this);
+		    	d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		    	d.setContentView(R.layout.alerting_il);
+		    	d.show();
+		    }
+			else{
 			if(hasit.size() == 0)
 			{
 			 Toast.makeText(getApplicationContext(), "Empty No Data! for Barcode : "+scanContent, Toast.LENGTH_SHORT).show();	
@@ -285,6 +292,7 @@ public class Driver extends Activity implements OnClickListener{
 				Toast.makeText(getApplicationContext(), "Not Found Barcode : "+scanContent, Toast.LENGTH_SHORT).show();		
 			}
 			}
+		}
 		}
 		else
 		{
