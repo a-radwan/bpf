@@ -2,6 +2,8 @@ package com.Zeft.zeftproject;
 import java.util.LinkedList;
 import java.util.List;
 
+import maps.GoogleMapv2;
+
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Category;
@@ -9,13 +11,20 @@ import com.example.bdf.data.Product;
 import com.example.bdf.data.UserProfile;
 import com.example.bdf.data.Vendor;
 import com.example.bdf.data.VendorHasProduct;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,6 +47,9 @@ public class Driver extends Activity implements OnClickListener{
 	private Vendor vendor;
 	private Button btn_search_for_products;
 	private Button btn_search_cat;
+	private GoogleMap map;
+	private String stringLatitude;
+	private String stringLongitude;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -192,10 +204,25 @@ public class Driver extends Activity implements OnClickListener{
 			final EditText etxt_lat = (EditText) d.findViewById(R.id.etxt_lat);
 			final EditText etxt_long = (EditText) d.findViewById(R.id.etxt_longitude);
 			Button btn_sign = (Button) d.findViewById(R.id.btn_login_in);
+			// check if GPS enabled
+	        GPSTracker gpsTracker = new GPSTracker(this);
+
+	        if (gpsTracker.getIsGPSTrackingEnabled())
+	        {
+	            stringLatitude = String.valueOf(gpsTracker.latitude);
+	            stringLongitude = String.valueOf(gpsTracker.longitude);
+	            etxt_lat.setText(stringLatitude);
+	            etxt_long.setText(stringLongitude);
+	            
+	        }
+	        else
+	        {
+	        	 Toast.makeText(getApplicationContext(), "Problem Of Finding Your Location , Add it Manually" , Toast.LENGTH_SHORT).show();
+	        }
 			///////////////////////////////
 			txt_header.setTypeface(typeface2);
 			etxt_name.setTypeface(typeface2);
-			etxt_pwd.setTypeface(typeface2);
+			etxt_pwd.setTypeface(typeface2); 
 			etxt_pwd_conf.setTypeface(typeface2);
 			etxt_email.setTypeface(typeface2);
 			etxt_phone.setTypeface(typeface2);
@@ -233,7 +260,7 @@ public class Driver extends Activity implements OnClickListener{
 							Intent i= new Intent(getApplicationContext(),Vendor_info.class);
 							Bundle b = new Bundle();
 							b.putInt("UserID", vendor.getId());
-							Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
+						//	Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
 							i.putExtras(b);
 							startActivity(i);
 							finish();

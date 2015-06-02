@@ -1,5 +1,6 @@
 package maps;
 
+import com.Zeft.zeftproject.GPSTracker;
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Vendor;
@@ -23,26 +24,31 @@ public class GoogleMapv2 extends Activity {
 	private int DB_bundle_id;
 	private SQLiteHelper db;
 	private Vendor vendor;
+	private Object stringLatitude;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_google_mapv2);
-
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		map.setMyLocationEnabled(true);
 		Location userLocation = map.getMyLocation();
 		LatLng myLocation = null;
+		
+		// check if GPS enabled
+        GPSTracker gpsTracker = new GPSTracker(this);
+
+        if (gpsTracker.getIsGPSTrackingEnabled())
+        {
+           
+        	map.animateCamera( CameraUpdateFactory.newLatLngZoom( new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()),10.0f ) ); 
+        }
 		if (userLocation != null)
 		{
 			myLocation = new LatLng(userLocation.getLatitude(),
 					userLocation.getLongitude()); 
-			map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,
-					15));
-
-
-
-		}
+			map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 12.0f));
+		} 
 		Bundle bundle = this.getIntent().getExtras();  
 
 		if(bundle !=null)
@@ -59,9 +65,13 @@ public class GoogleMapv2 extends Activity {
 		}
 		else
 		{
-			Toast.makeText(getApplicationContext(), "Somthing Wrong", Toast.LENGTH_SHORT).show();
+		 //use DB	
 		}
 
+	}
+	public GoogleMap getMap()
+	{
+	 return map;	
 	}
 	public void AddMarker(double lat , double longitude , String Title , String info)
 	{
