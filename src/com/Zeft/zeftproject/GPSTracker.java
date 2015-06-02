@@ -28,7 +28,6 @@ import android.util.Log;
  */
 
 public class GPSTracker extends Service implements LocationListener {
-
     // Get Class Name
     private static String TAG = GPSTracker.class.getName();
 

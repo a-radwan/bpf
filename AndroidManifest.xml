@@ -19,7 +19,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--
      The following two permissions are not required to use
-     Google Maps Android API v2, but are recommended.
+     Google Maps Android API v2, but are recommended.
+
+
+
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -41,8 +44,7 @@
         <activity
             android:name="maps.GoogleMapv2"
             android:label="@string/title_activity_google_mapv2"
-            android:screenOrientation="portrait" >
-             
+            android:screenOrientation="portrait" >   
         </activity>
 
         <meta-data

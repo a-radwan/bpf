@@ -39,7 +39,6 @@ public class Vendor_info extends Activity {
 		setContentView(R.layout.activity_vendor_info);
 		///////////////////////////////
 		////INTALIZATION
-		txt_view = (TextView) findViewById(R.id.txt_view_products);
 		txt_vendor_name = (TextView) findViewById(R.id.txt_view_name);
 		txt_vendor_phone = (TextView) findViewById(R.id.txt_view_phone);
 		txt_vendor_email = (TextView) findViewById(R.id.txt_view_email);
@@ -47,15 +46,14 @@ public class Vendor_info extends Activity {
 		txt_vendor_location_view = (TextView) findViewById(R.id.txt_view_Location_on_map);
 		bAddProduct=(Button)findViewById(R.id.bAddProduct);
 		///////////////////////////////////
-		//////TYPEFACING
+		//////TYPEFACING//////////////////
 		Typeface ttf = Typeface.createFromAsset(getAssets(), "abc2.ttf");
-
 		txt_vendor_name.setTypeface(ttf);
 		txt_vendor_location.setTypeface(ttf);
 		txt_vendor_email.setTypeface(ttf);
 		txt_vendor_phone.setTypeface(ttf);
-		//////////////////////////
-		///Checking Bundle
+		////////////////////////////////
+		///Checking Bundle/////////////
 		Bundle bundle = this.getIntent().getExtras();  
 		
 		if(bundle !=null)
@@ -77,15 +75,6 @@ public class Vendor_info extends Activity {
 		}
 		////////////////////////////////// 
 		///lISTENERS
-		txt_view.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), Products.class);
-				startActivity(intent);
-
-			}
-		});
 		txt_vendor_location_view.setOnClickListener(new OnClickListener() {
 
 			@Override
