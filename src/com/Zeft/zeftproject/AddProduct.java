@@ -72,7 +72,13 @@ public class AddProduct extends Activity {
 				db.addVendorHasProduct(UserProfile.getCurrntUser(), product,price);
 		
 				Toast.makeText(getApplicationContext(),"Added Successfuly",Toast.LENGTH_SHORT).show();;
-			finish();
+				Intent i = new Intent(getApplicationContext(),Driver.class);
+			    Bundle b = new Bundle();
+			    b.putInt("LogedFrom", UserProfile.getCurrntUser().getId());
+			    i.putExtras(b);
+			    startActivity(i);
+				finish();
+				
 			}
 		});
 	}
@@ -112,4 +118,5 @@ public class AddProduct extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
 }

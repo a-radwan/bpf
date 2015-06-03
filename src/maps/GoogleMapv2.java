@@ -62,7 +62,11 @@ public class GoogleMapv2 extends Activity {
 		    vendor = db.getVendor(DB_bundle_id);
 		    AddMarker(vendor.getLatitude(), vendor.getLongitude(), vendor.getName(), vendor.getEmail());
 		   }
-		      
+		   else
+		   {
+			   String Markers = bundle.getString("MarkThem");
+			   String [] temp = Markers.split(","); 
+		   }
 
 		  }
 		  else

@@ -2,6 +2,8 @@ package com.Zeft.zeftproject.ListView;
 import java.util.Date;
 import java.util.LinkedList;
 
+import maps.GoogleMapv2;
+
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.UserProfile;
@@ -16,6 +18,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -33,7 +36,6 @@ public class SearchCategoryProducts extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_products);
 		/////////////////////////////////////////////
 		///ZINITALIZATION
-
 		String category = (String) getIntent().getSerializableExtra("category");
 
 		db = SQLiteHelper.getInstance(getApplicationContext());
@@ -56,8 +58,7 @@ public class SearchCategoryProducts extends Activity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-//				Toast.makeText(getApplicationContext(), "mdnmcdgabadb", Toast.LENGTH_SHORT)
-//				.show();
+				startActivity(new Intent(getApplicationContext(),GoogleMapv2.class));
 			}
 		});
 		registerForContextMenu(lvProducts);
@@ -66,8 +67,14 @@ public class SearchCategoryProducts extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 
 	}
-
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+	if(MotionEvent.ACTION_DOWN == event.getActionMasked())
+	{
+		startActivity(new Intent(getApplicationContext(),GoogleMapv2.class));
+	}
+	return super.onTouchEvent(event);
+}
 }

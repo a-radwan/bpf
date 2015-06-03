@@ -53,19 +53,17 @@ public class Driver extends Activity implements OnClickListener{
 	private GoogleMap map;
 	private String stringLatitude;
 	private String stringLongitude;
+	private int returninig;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_driver);
+		////////////////////////////////////////////
 		/////////////////////////////////////////////
 		///ZINITALIZATION
 		db=SQLiteHelper.getInstance(this);
 		vendor = new Vendor();
-		vendor.setName("aa");
-		vendor.setPassword("aa");
-		db.addVendor(vendor);
-
 		typeface = Typeface.createFromAsset(getAssets(), "abc.TTF");
 		typeface2 = Typeface.createFromAsset(getAssets(), "abc2.ttf");
 		btn_log = (Button) findViewById(R.id.btn_login);
@@ -155,10 +153,10 @@ public class Driver extends Activity implements OnClickListener{
 			else
 			{
 				Intent i = new Intent(getApplicationContext() , SearchCategoryProducts.class);
-			     Bundle b = new Bundle();
-			     b.putString("category", (String)spinner.getSelectedItem());
-			     i.putExtras(b);
-			     startActivity(i);			
+				Bundle b = new Bundle();
+				b.putString("category", (String)spinner.getSelectedItem());
+				i.putExtras(b);
+				startActivity(i);			
 
 
 			}
@@ -235,19 +233,19 @@ public class Driver extends Activity implements OnClickListener{
 							String title = etxt_name.getText().toString();
 							String info = etxt_email.getText().toString();
 							String phone = etxt_phone.getText().toString();
-							//adding vendor info to the DB
-
+							//adding vendor info to the DataBase
 							vendor.setName(title);
 							vendor.setPassword(etxt_pwd.getText().toString());
 							vendor.setLatitude(Locations[0]);
 							vendor.setLongitude(Locations[1]);
 							vendor.setEmail(info);
 							vendor.setPhone(phone);
-							db.addVendor(vendor);
+							Vendor addedVendor = db.addVendor(vendor);
+							UserProfile.login(addedVendor.getId(), getApplicationContext());
 							Intent i= new Intent(getApplicationContext(),Vendor_info.class);
 							Bundle b = new Bundle();
 							b.putInt("UserID", vendor.getId());
-							//	Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
+							//Toast.makeText(getApplicationContext(), ""+vendor.getId(), Toast.LENGTH_SHORT).show();
 							i.putExtras(b);
 							startActivity(i);
 							finish();
@@ -285,11 +283,11 @@ public class Driver extends Activity implements OnClickListener{
 			}
 			else{
 				Intent i = new Intent(getApplicationContext() , SearchProducts.class);
-			     Bundle b = new Bundle();
-			     b.putString("barcode", scanContent );
-			     i.putExtras(b);
-			     startActivity(i);			
-			     }
+				Bundle b = new Bundle();
+				b.putString("barcode", scanContent );
+				i.putExtras(b);
+				startActivity(i);			
+			}
 		}
 		else
 		{
