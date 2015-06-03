@@ -48,17 +48,29 @@ public class SearchCategoryProducts extends Activity implements OnClickListener{
 			if((db.getProduct(vendorProducts.get(i).getProductBarcode())).getCategoryId().equals(category))
 				vp.add(vendorProducts.get(i));
 		}
-//		vendor = UserProfile.getCurrntUser();
+		//		vendor = UserProfile.getCurrntUser();
 		SearchCategoryProductAdapter productAdapter = new SearchCategoryProductAdapter(getApplicationContext(), vp);
-	
-		
+
+
 		lvProducts.setAdapter(productAdapter);
 		lvProducts.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				startActivity(new Intent(getApplicationContext(),GoogleMapv2.class));
+				Intent i = new Intent(getApplicationContext(),GoogleMapv2.class);
+				Bundle b = new Bundle();
+				String Mark = "";
+				Vendor ven = new Vendor();
+				ven = db.getVendor(vendorProducts.get(position).getVendorId());
+				Mark += ven.getLatitude()+","
+						+ven.getLongitude()+","
+						+ven.getName()+","
+						+vendorProducts.get(position).getPrice();
+				b.putString("MarkThem", Mark);
+				i.putExtras(b);
+				startActivity(i);
+				finish();
 			}
 		});
 		registerForContextMenu(lvProducts);
@@ -69,12 +81,12 @@ public class SearchCategoryProducts extends Activity implements OnClickListener{
 	public void onClick(View v) {
 
 	}
-@Override
-public boolean onTouchEvent(MotionEvent event) {
-	if(MotionEvent.ACTION_DOWN == event.getActionMasked())
-	{
-		startActivity(new Intent(getApplicationContext(),GoogleMapv2.class));
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		if(MotionEvent.ACTION_DOWN == event.getActionMasked())
+		{
+			startActivity(new Intent(getApplicationContext(),GoogleMapv2.class));
+		}
+		return super.onTouchEvent(event);
 	}
-	return super.onTouchEvent(event);
-}
 }

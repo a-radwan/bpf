@@ -29,25 +29,37 @@ public class SearchProducts extends Activity implements OnClickListener{
 	Vendor vendor;
 	SQLiteHelper db;
 	LinkedList<VendorHasProduct> vendorProducts;
+	LinkedList<VendorHasProduct>threeVB=new LinkedList<VendorHasProduct>();
+	private String ids;
+	VendorHasProduct min;
+	private String barcode;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_products);
 		/////////////////////////////////////////////
 		///INITALIZATION
-		String barcode = (String) getIntent().getSerializableExtra("barcode");
+		 barcode = (String) getIntent().getSerializableExtra("barcode");
 		db = SQLiteHelper.getInstance(getApplicationContext());
-
+		ids = "";
 		lvProducts = (ListView) findViewById(R.id.lvProducts);
 		vendorProducts = db.getAllVendorsAndProducts(db.getProduct(barcode));
-		LinkedList<VendorHasProduct>threeVB=new LinkedList<VendorHasProduct>();
-		VendorHasProduct min;
+		
+		
 		if(vendorProducts.size()>0){
 		 min=vendorProducts.get(0);
 		for(int i=0;i<vendorProducts.size();i++)
 		{
 			if(vendorProducts.get(i).getPrice()<min.getPrice())
 				min=vendorProducts.get(i);
+			    if(ids.equals(""))
+			    {
+			    	ids += ""+min.getId();
+			    }
+			    else
+			    {
+			      ids += ids+","+min.getId();	
+			    }
 		}
 		threeVB.add(min);
 		vendorProducts.remove(min);
@@ -91,8 +103,33 @@ public class SearchProducts extends Activity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
-				
+				Intent i = new Intent(getApplicationContext(),GoogleMapv2.class);
+				Bundle b = new Bundle();
+				String Mark = "";
+				Vendor ven = new Vendor();
+				for(int x = 0 ;x <threeVB.size() ; x++ )
+				{
+					if(Mark.equals(""))
+					{
+						ven = db.getVendor(threeVB.get(x).getVendorId());
+						Mark += ven.getLatitude()+","
+								+ven.getLongitude()+","
+								+ven.getName()+","
+								+threeVB.get(x).getPrice();
+					}
+					else
+					{
+						ven = db.getVendor(threeVB.get(x).getVendorId());
+						Mark += ";"+ven.getLatitude()+","
+								+ven.getLongitude()+","
+								+ven.getName()+","
+								+threeVB.get(x).getPrice();	
+					}
+				}
+				b.putString("MarkThem", Mark);
+				i.putExtras(b);
+				startActivity(i);
+				finish();
 			}
 		});
 		registerForContextMenu(lvProducts);
@@ -104,5 +141,8 @@ public class SearchProducts extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 
 	}
-
+    public LinkedList<VendorHasProduct> getVendors()
+    {
+     return threeVB; 	
+    }
 }

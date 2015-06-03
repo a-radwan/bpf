@@ -118,5 +118,10 @@ public class AddProduct extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+	@Override
+	public void onBackPressed() {
+		startActivity(new Intent(getApplicationContext(),Driver.class));
+		finish();
+		super.onBackPressed();
+	}
 }
