@@ -63,6 +63,8 @@ class VendorTable {
 		// 3. go over each row, build book and add it to list
 		Vendor vendor = new Vendor();
 		if (cursor.moveToFirst()) {
+			do{
+				vendor = new Vendor();
 					vendor.setId(cursor.getInt(COL_VENDORID));
 					vendor.setName(cursor.getString(COL_NAME));
 					vendor.setPassword(cursor.getString(COL_PASSWORD));
@@ -72,7 +74,8 @@ class VendorTable {
 					vendor.setPhone(cursor.getString(COL_PHONE));
 				// Add book to books
 				vendors.add(vendor);
-			} 
+			}while(cursor.moveToNext());
+		}
 		
 //		db.close();
 		return vendors;

@@ -1,5 +1,7 @@
 package com.example.bdf.data;
 
+import android.database.sqlite.SQLiteDatabase;
+
 public class VendorHasProduct {
 	private int id;
 	private int vendorId;
@@ -40,5 +42,6 @@ public class VendorHasProduct {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 
 }

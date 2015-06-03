@@ -21,6 +21,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Toast;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 	private static SQLiteHelper sInstance;
@@ -70,7 +71,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				+ "barcode TEXT PRIMARY KEY , " + "name TEXT, "
 				+ "categoryid INTEGER, FOREIGN KEY (categoryid) REFERENCES categories (categoryid) )";
 
-   
+
 
 		String CREATE_VENDOR_HAS_PRODUCT_TABLE = "CREATE TABLE  vendorhasproduct ( "
 				+ "hasid INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -89,7 +90,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 		Category category = new Category();
 		if (context != null) {
-			
+
 			category.setName(context.getString(R.string.home_appliances));
 			CategoryTable.add(db, category);
 			category.setName(context.getString(R.string.health_and_beauty));
@@ -235,7 +236,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	 * 
 	 ************************************/
 	public void addVendorHasProduct(Vendor vendor,Product product ,double price) {
-		VendorHasProductTable.add(this.getWritableDatabase(), vendor,product,price);
+		if(VendorHasProductTable.add(this.getWritableDatabase(), vendor,product,price))
+		{
+			Toast.makeText(context, "Added successfuly", Toast.LENGTH_SHORT).show();
+		}	
+		else
+			Toast.makeText(context, "Failed You already have added this product before", Toast.LENGTH_SHORT).show();
+
+
 	}
 	public void addVendorHasProduct(VendorHasProduct vendorHasProduct) {
 		VendorHasProductTable.add(this.getWritableDatabase(), vendorHasProduct);

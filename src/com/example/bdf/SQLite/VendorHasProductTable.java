@@ -2,14 +2,18 @@ package com.example.bdf.SQLite;
 
 import java.util.Date;
 import java.util.LinkedList;
+
 import com.example.bdf.data.Product;
 import com.example.bdf.data.Vendor;
 import com.example.bdf.data.VendorHasProduct;
 
+import android.R.string;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 
 class VendorHasProductTable {
@@ -28,9 +32,15 @@ class VendorHasProductTable {
 	static final int COL_PRICE = 3;
 
 
-	public static void add(SQLiteDatabase db, Vendor vendor,Product product,double price) {
+	public static boolean add(SQLiteDatabase db, Vendor vendor,Product product,double price) 
+	{
 		if (!ProductTable.has(db, product.getBarcode())) {
 			ProductTable.add(db, product);
+		}
+		if(VendorHasProductTable.has(db,vendor,product))
+		{
+			return false;
+
 		}
 		ContentValues values = new ContentValues();
 		values.put(KEY_VENDOR_ID, vendor.getId()); // get title
@@ -39,11 +49,24 @@ class VendorHasProductTable {
 		vendor.setId((int)db.insert(TABLE_VENDORS_HAS_PRODUCT, // table
 				null, // nullColumnHack
 				values)); // key/value -> keys = column names/ values = column
-							// values
+		// values
 		// 4. close
 		// db.close();
-		
+return true;
 	}
+	public static boolean has(SQLiteDatabase db,Vendor vendor,Product product)
+	{
+		// 1. build the query
+		String query = "SELECT  * FROM " + TABLE_VENDORS_HAS_PRODUCT +" where "+KEY_BARCODE+"="+product.getBarcode()+" AND "+KEY_VENDOR_ID+" = "+vendor.getId();
+
+		// 2. get reference to writable DB
+		Cursor cursor = db.rawQuery(query, null);
+
+		// 3. go over each row, build book and add it to list
+		VendorHasProduct vendorHasProduct = new VendorHasProduct();
+		return cursor.moveToFirst();
+	}
+
 	public static VendorHasProduct add(SQLiteDatabase db, VendorHasProduct vendorHasProduct) {
 
 		ContentValues values = new ContentValues();
@@ -53,7 +76,7 @@ class VendorHasProductTable {
 		vendorHasProduct.setId((int)db.insert(TABLE_VENDORS_HAS_PRODUCT, // table
 				null, // nullColumnHack
 				values)); // key/value -> keys = column names/ values = column
-							// values
+		// values
 		// 4. close
 		// db.close();
 		return vendorHasProduct;
@@ -73,17 +96,17 @@ class VendorHasProductTable {
 		VendorHasProduct vendorHasProduct = new VendorHasProduct();
 		if (cursor.moveToFirst()) {
 			do{
-					vendorHasProduct = new VendorHasProduct();
-					vendorHasProduct.setId(cursor.getInt(COL_ID));
-					vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
-					vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
-					vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
+				vendorHasProduct = new VendorHasProduct();
+				vendorHasProduct.setId(cursor.getInt(COL_ID));
+				vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
+				vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
+				vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
 				// Add book to books
-					vendorHasProductList.add(vendorHasProduct);
-		}while(cursor.moveToNext());	
+				vendorHasProductList.add(vendorHasProduct);
+			}while(cursor.moveToNext());	
 		} 
-		
-//		db.close();
+
+		//		db.close();
 		return vendorHasProductList;
 	}
 	public static LinkedList<VendorHasProduct> getAll(SQLiteDatabase db,Product product) {
@@ -100,16 +123,16 @@ class VendorHasProductTable {
 		if (cursor.moveToFirst()) {
 			do{
 				vendorHasProduct = new VendorHasProduct();
-					vendorHasProduct.setId(cursor.getInt(COL_ID));
-					vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
-					vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
-					vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
+				vendorHasProduct.setId(cursor.getInt(COL_ID));
+				vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
+				vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
+				vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
 				// Add book to books
-					vendorHasProductList.add(vendorHasProduct);
+				vendorHasProductList.add(vendorHasProduct);
 			}while(cursor.moveToNext());
-			} 
-		
-//		db.close();
+		} 
+
+		//		db.close();
 		return vendorHasProductList;
 	}
 	public static LinkedList<VendorHasProduct> getAll(SQLiteDatabase db,Vendor vendor) {
@@ -126,47 +149,47 @@ class VendorHasProductTable {
 		if (cursor.moveToFirst()) {
 			do{
 				vendorHasProduct = new VendorHasProduct();
-					vendorHasProduct.setId(cursor.getInt(COL_ID));
-					vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
-					vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
-					vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
+				vendorHasProduct.setId(cursor.getInt(COL_ID));
+				vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
+				vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
+				vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
 				// Add book to books
-					vendorHasProductList.add(vendorHasProduct);
-		}while(cursor.moveToNext());
+				vendorHasProductList.add(vendorHasProduct);
+			}while(cursor.moveToNext());
 		} 
-		
-//		db.close();
+
+		//		db.close();
 		return vendorHasProductList;
 	}
 
 
-//	public static Vendor get(SQLiteDatabase db, int id) {
-//		// 1. get reference to readable DB
-//
-//		// 2. build query
-//		Cursor cursor = db.query(TABLE_VENDORS_HAS_PRODUCT, // a. table
-//				COLUMNS, // b. column names
-//				KEY_VENDOR_ID + "= ?", // c. selections
-//				new String[] { String.valueOf(id) }, // d. selections args
-//				null, // e. group by
-//				null, // f. having
-//				null, // g. order by
-//				null); // h. limit
-//
-//		// 3. if we got results get the first one
-//		if (cursor != null)
-//			cursor.moveToFirst();
-//		Vendor vendor=new Vendor();
-//		vendor.setId(cursor.getInt(COL_VENDORID));
-//		vendor.setName(cursor.getString(COL_NAME));
-//		vendor.setPassword(cursor.getString(COL_PASSWORD));
-//		vendor.setLatitude(cursor.getDouble(COL_LATITUDE));
-//		vendor.setLongitude(cursor.getDouble(COL_LONGITUDE));
-//		
-//		// db.close();
-//		return vendor;
-//
-//	}
+	//	public static Vendor get(SQLiteDatabase db, int id) {
+	//		// 1. get reference to readable DB
+	//
+	//		// 2. build query
+	//		Cursor cursor = db.query(TABLE_VENDORS_HAS_PRODUCT, // a. table
+	//				COLUMNS, // b. column names
+	//				KEY_VENDOR_ID + "= ?", // c. selections
+	//				new String[] { String.valueOf(id) }, // d. selections args
+	//				null, // e. group by
+	//				null, // f. having
+	//				null, // g. order by
+	//				null); // h. limit
+	//
+	//		// 3. if we got results get the first one
+	//		if (cursor != null)
+	//			cursor.moveToFirst();
+	//		Vendor vendor=new Vendor();
+	//		vendor.setId(cursor.getInt(COL_VENDORID));
+	//		vendor.setName(cursor.getString(COL_NAME));
+	//		vendor.setPassword(cursor.getString(COL_PASSWORD));
+	//		vendor.setLatitude(cursor.getDouble(COL_LATITUDE));
+	//		vendor.setLongitude(cursor.getDouble(COL_LONGITUDE));
+	//		
+	//		// db.close();
+	//		return vendor;
+	//
+	//	}
 
 	public static int update(SQLiteDatabase db, VendorHasProduct vendorHasProduct) {
 		// 2. create ContentValues to add key "column"/value
@@ -180,7 +203,7 @@ class VendorHasProductTable {
 				values, // column/value
 				KEY_ID + " = ?", // selections
 				new String[] { String.valueOf(vendorHasProduct.getId()) }); // selection
-																	// args
+		// args
 
 		// 4. close
 		// db.close();
@@ -191,7 +214,7 @@ class VendorHasProductTable {
 				new String[] { String.valueOf(vendorHasProduct.getId()) });
 
 		// 3. close
-//		db.close();
+		//		db.close();
 
 	}
 

@@ -51,13 +51,15 @@ class ProductTable {
 		// 3. go over each row, build book and add it to list
 		Product product = new Product();
 		if (cursor.moveToFirst()) {
+			do{
 					product.setBarcode(cursor.getString(COL_PRODUCT_BARCODE));
 					product.setName(cursor.getString(COL_NAME));
 					product.setCategoryId(cursor.getString(COL_CATEGORYID));
 				
 				// Add book to books
 				products.add(product);
-			} 
+			}while(cursor.moveToNext());
+		}
 		
 //		db.close();
 		return products;
