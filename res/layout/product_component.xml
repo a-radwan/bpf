@@ -12,15 +12,15 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="0dp"
-        android:paddingRight="10dp"
+        android:paddingRight="5dp"
         android:weightSum="100" >
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="80"
+            android:layout_height="wrap_content"
+            android:layout_weight="70"
             android:orientation="vertical"
-            android:padding="10dp" >
+            android:padding="2dp" >
 
             <TextView
                 android:id="@+id/tvProductName"
@@ -33,14 +33,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#F4F4F2"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:showDividers="end"
-                android:weightSum="100" >
+                >
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -64,9 +63,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -74,7 +72,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="4dp"
                         android:text="Category"
                         android:textColor="#A3A39D"
@@ -95,7 +92,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="28dp"
-            android:layout_weight="20"
+            android:layout_weight="30"
             android:background="@drawable/price"
             android:gravity="center" >
 
@@ -105,7 +102,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
-                android:text="200"
+                android:text="200.0"
+                android:textSize="12sp"
                 android:textColor="#FF942E" />
         </LinearLayout>
 

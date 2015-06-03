@@ -72,13 +72,16 @@ class VendorHasProductTable {
 		// 3. go over each row, build book and add it to list
 		VendorHasProduct vendorHasProduct = new VendorHasProduct();
 		if (cursor.moveToFirst()) {
+			do{
+					vendorHasProduct = new VendorHasProduct();
 					vendorHasProduct.setId(cursor.getInt(COL_ID));
 					vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
 					vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));
 					vendorHasProduct.setPrice(cursor.getDouble(COL_PRICE));
 				// Add book to books
 					vendorHasProductList.add(vendorHasProduct);
-			} 
+		}while(cursor.moveToNext());	
+		} 
 		
 //		db.close();
 		return vendorHasProductList;
@@ -96,6 +99,7 @@ class VendorHasProductTable {
 		VendorHasProduct vendorHasProduct = new VendorHasProduct();
 		if (cursor.moveToFirst()) {
 			do{
+				vendorHasProduct = new VendorHasProduct();
 					vendorHasProduct.setId(cursor.getInt(COL_ID));
 					vendorHasProduct.setProductBarcode(cursor.getString(COL_BARCODE));
 					vendorHasProduct.setVendorId(cursor.getInt(COL_VENDOR_ID));

@@ -48,6 +48,7 @@ public class SearchCategoryProductAdapter extends BaseAdapter implements ListAda
 					
 					TextView productName = (TextView) rowView.findViewById(R.id.tvProductName);
 					productName.setText(vendor.getName());
+					productName.setText(product.getName());
 					TextView barcode = (TextView) rowView
 							.findViewById(R.id.tvBarcode);
 					TextView etendor = (TextView) rowView

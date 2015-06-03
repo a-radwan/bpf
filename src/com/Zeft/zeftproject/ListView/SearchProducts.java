@@ -40,9 +40,48 @@ public class SearchProducts extends Activity implements OnClickListener{
 
 		lvProducts = (ListView) findViewById(R.id.lvProducts);
 		vendorProducts = db.getAllVendorsAndProducts(db.getProduct(barcode));
+		LinkedList<VendorHasProduct>threeVB=new LinkedList<VendorHasProduct>();
+		VendorHasProduct min;
+		if(vendorProducts.size()>0){
+		 min=vendorProducts.get(0);
+		for(int i=0;i<vendorProducts.size();i++)
+		{
+			if(vendorProducts.get(i).getPrice()<min.getPrice())
+				min=vendorProducts.get(i);
+		}
+		threeVB.add(min);
+		vendorProducts.remove(min);
+		}
+		if(vendorProducts.size()>0){
 
+		min=vendorProducts.get(0);
+		for(int i=0;i<vendorProducts.size();i++)
+		{
+			if(vendorProducts.get(i).getPrice()<min.getPrice())
+				min=vendorProducts.get(i);
+		}
+		threeVB.add(min);
+		vendorProducts.remove(min);
+
+		}
+		if(vendorProducts.size()>0){
+			 min=vendorProducts.get(0);
+
+		for(int i=0;i<vendorProducts.size();i++)
+		{
+			if(vendorProducts.get(i).getPrice()<min.getPrice())
+				min=vendorProducts.get(i);
+		}
+		threeVB.add(min);
+		vendorProducts.remove(min);
+		}
 //		vendor = UserProfile.getCurrntUser();
-		SearchProductAdapter productAdapter = new SearchProductAdapter(getApplicationContext(), vendorProducts);
+		if(threeVB.size()==0)
+		{
+			this.finish();
+			Toast.makeText(getApplicationContext(), "There is no such products", Toast.LENGTH_LONG).show();
+		}
+			SearchProductAdapter productAdapter = new SearchProductAdapter(getApplicationContext(), threeVB);
 		
 	
 		

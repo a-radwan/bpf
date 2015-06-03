@@ -155,10 +155,10 @@ public class Driver extends Activity implements OnClickListener{
 			else
 			{
 				Intent i = new Intent(getApplicationContext() , SearchCategoryProducts.class);
-			     Bundle b = new Bundle();
-			     b.putString("category", (String)spinner.getSelectedItem());
-			     i.putExtras(b);
-			     startActivity(i);			
+				Bundle b = new Bundle();
+				b.putString("category", (String)spinner.getSelectedItem());
+				i.putExtras(b);
+				startActivity(i);			
 
 
 			}
@@ -276,20 +276,23 @@ public class Driver extends Activity implements OnClickListener{
 		{
 			String scanContent = scanningResult.getContents();
 			String scanFormat = scanningResult.getFormatName();
-			if((scanContent.subSequence(0, 3)+"").equalsIgnoreCase("729"))
+			if(!(scanContent==null||scanContent.equals("")))
 			{
-				Dialog d = new Dialog(Driver.this);
-				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				d.setContentView(R.layout.alerting_il);
-				d.show();
+				if((scanContent.subSequence(0, 3)+"").equalsIgnoreCase("729"))
+				{
+					Dialog d = new Dialog(Driver.this);
+					d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+					d.setContentView(R.layout.alerting_il);
+					d.show();
+				}
+				else{
+					Intent i = new Intent(getApplicationContext() , SearchProducts.class);
+					Bundle b = new Bundle();
+					b.putString("barcode", scanContent );
+					i.putExtras(b);
+					startActivity(i);			
+				}
 			}
-			else{
-				Intent i = new Intent(getApplicationContext() , SearchProducts.class);
-			     Bundle b = new Bundle();
-			     b.putString("barcode", scanContent );
-			     i.putExtras(b);
-			     startActivity(i);			
-			     }
 		}
 		else
 		{
