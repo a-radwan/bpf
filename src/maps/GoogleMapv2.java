@@ -1,9 +1,14 @@
 package maps;
 
+import java.util.LinkedList;
+
+import com.Zeft.zeftproject.Driver;
 import com.Zeft.zeftproject.GPSTracker;
 import com.Zeft.zeftproject.R;
+import com.Zeft.zeftproject.ListView.SearchProducts;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Vendor;
+import com.example.bdf.data.VendorHasProduct;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -13,6 +18,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -56,7 +62,7 @@ public class GoogleMapv2 extends Activity {
 		  {
 
 		   DB_bundle_id = bundle.getInt("VendorID");
-		   if(!(DB_bundle_id+"").equals(""))
+		   if(DB_bundle_id != 0)
 		   {
 		    db=SQLiteHelper.getInstance(this);
 		    vendor = db.getVendor(DB_bundle_id);
@@ -64,21 +70,30 @@ public class GoogleMapv2 extends Activity {
 		   }
 		   else
 		   {
-			   String Markers = bundle.getString("MarkThem");
-			   String [] temp = Markers.split(","); 
+			  
+			   String data = bundle.getString("MarkThem");
+			   String [] line = data.split(";");
+			   for(int i = 0 ; i < line.length ; i ++)
+			   {
+				   String [] inLine = line[i].split(",");
+				   if(i==0){
+				   AddMarker2(Double.parseDouble(inLine[0].trim()),
+						   Double.parseDouble(inLine[1].trim()), 
+								   inLine[2], 
+								   inLine[3]);
+				   }
+				   else
+				   {
+					   AddMarker(Double.parseDouble(inLine[0].trim()),
+							   Double.parseDouble(inLine[1].trim()), 
+									   inLine[2], 
+									   inLine[3]);
+				   }
+				  
+			   }
 		   }
-
 		  }
-		  else
-		  {
-		   AddMarker2(30.9700467,34.28733,"SuperMarket","10");
-		   AddMarker2(31.9700467,32.26733,"SuperMarket2","11");
-		   AddMarker(29.1700467,36.38733,"SuperMarket3","9");
-		  }
-	}
-	public GoogleMap getMap()
-	{
-	 return map;	
+		
 	}
 	public void AddMarker(double lat , double longitude , String Title , String info)
 	{
@@ -99,4 +114,11 @@ public class GoogleMapv2 extends Activity {
 	  .snippet(info)
 	  .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
 	 }
+	@Override
+	public void onBackPressed() 
+	{
+		startActivity(new Intent(getApplicationContext(),Driver.class));
+		finish();
+		super.onBackPressed();
+	}
 }
