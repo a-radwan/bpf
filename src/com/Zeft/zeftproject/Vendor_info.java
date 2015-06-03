@@ -104,6 +104,7 @@ public class Vendor_info extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getApplicationContext(), AddProduct.class);
 				startActivity(intent);
+				finish();
 			}
 		});
 		txt_view.setOnClickListener(new OnClickListener() {
@@ -112,7 +113,7 @@ public class Vendor_info extends Activity {
 						public void onClick(View v) {
 							Intent intent = new Intent(getApplicationContext(), Products.class);
 							startActivity(intent);
-			
+							finish();
 						}
 					});
 	}
@@ -122,5 +123,12 @@ public class Vendor_info extends Activity {
 		txt_vendor_email.setText(txt_vendor_email.getText()+" "+txt_name);
 		txt_vendor_phone.setText(txt_vendor_phone.getText()+" "+txt_name);
 		txt_vendor_location.setText(txt_vendor_location.getText()+" "+txt_name);
+	}
+	@Override
+	public void onBackPressed() 
+	{
+		startActivity(new Intent(getApplicationContext(),Driver.class));
+	    finish();
+		super.onBackPressed();
 	}
 }

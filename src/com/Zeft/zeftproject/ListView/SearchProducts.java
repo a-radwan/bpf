@@ -2,6 +2,8 @@ package com.Zeft.zeftproject.ListView;
 import java.util.Date;
 import java.util.LinkedList;
 
+import maps.GoogleMapv2;
+
 import com.Zeft.zeftproject.R;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.UserProfile;
@@ -32,10 +34,8 @@ public class SearchProducts extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_products);
 		/////////////////////////////////////////////
-		///ZINITALIZATION
-
+		///INITALIZATION
 		String barcode = (String) getIntent().getSerializableExtra("barcode");
-
 		db = SQLiteHelper.getInstance(getApplicationContext());
 
 		lvProducts = (ListView) findViewById(R.id.lvProducts);
@@ -91,8 +91,8 @@ public class SearchProducts extends Activity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-//				Toast.makeText(getApplicationContext(), "mdnmcdgabadb", Toast.LENGTH_SHORT)
-//				.show();
+				
+				
 			}
 		});
 		registerForContextMenu(lvProducts);

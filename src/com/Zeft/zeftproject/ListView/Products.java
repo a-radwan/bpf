@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.Zeft.zeftproject.R;
+import com.Zeft.zeftproject.Vendor_info;
 import com.example.bdf.SQLite.SQLiteHelper;
 import com.example.bdf.data.Product;
 import com.example.bdf.data.UserProfile;
@@ -39,18 +40,14 @@ public class Products extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_products);
 		/////////////////////////////////////////////
-		///ZINITALIZATION
-
+		///INITALIZATION
 		//int vendorId = Integer.parseInt((String) getIntent().getSerializableExtra("vendorId"));
 
 		db = SQLiteHelper.getInstance(getApplicationContext());
-
 		lvProducts = (ListView) findViewById(R.id.lvProducts);
-
 		vendor = UserProfile.getCurrntUser();
 		vendorProducts=db.getAllVendorsAndProducts(vendor);
 		ProductAdapter productAdapter = new ProductAdapter(getApplicationContext(), vendorProducts);
-
 		lvProducts.setAdapter(productAdapter);
 		lvProducts.setOnItemClickListener(new OnItemClickListener() {
 
@@ -77,23 +74,23 @@ public class Products extends Activity implements OnClickListener{
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 		infoPosition = info.position;
 		menu.setHeaderTitle("Product Options");
-	
-		
+
+
 		getMenuInflater().inflate(R.menu.driver,menu);
-		
+
 
 	}
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 
-		 if ((item.getTitle().toString())
+		if ((item.getTitle().toString())
 				.equals("delete")) {
 			deleteExp(vendorProducts.get(infoPosition));
 
 			Toast.makeText(getApplicationContext(), "deleted", Toast.LENGTH_SHORT).show();
-		 }
-		 else {
+		}
+		else {
 			Toast.makeText(getApplicationContext(), item.getTitle() + " wrong",
 					Toast.LENGTH_SHORT).show();
 			return false;
@@ -114,12 +111,17 @@ public class Products extends Activity implements OnClickListener{
 		vendor = UserProfile.getCurrntUser();
 		vendorProducts=db.getAllVendorsAndProducts(vendor);
 		ProductAdapter productAdapter = new ProductAdapter(getApplicationContext(), vendorProducts);
-
 		lvProducts.setAdapter(productAdapter);
-
 		registerForContextMenu(lvProducts);
 	}
-
-
-
+	@Override
+	public void onBackPressed() {
+		Intent i = new Intent(getApplicationContext(),Vendor_info.class);
+		Bundle b = new Bundle();
+		b.putInt("UserID", UserProfile.getCurrntUser().getId());
+		i.putExtras(b);
+		startActivity(i);
+		finish();
+		super.onBackPressed();
+	}
 }
